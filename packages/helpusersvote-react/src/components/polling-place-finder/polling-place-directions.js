@@ -5,19 +5,24 @@ import EARLY_VOTING_DATA from './data/early-voting.json'
 import POLLING_PLACE_DATA from './data/polls.json'
 import { getMapImages, toAddr } from './utils'
 
+import PlanMaker from '../plan-maker'
 import EarlyVotingCTA from './stateless/early-voting-cta'
 import PollingPlaceNotFound from './stateless/not-found'
 import LocationAddress from './stateless/location-address'
 import GoogleReportForm from './stateless/google-report-form'
-import { DirectionsDate, DirectionsHours } from './stateless/directions'
+import { DirectionsHours } from './stateless/directions'
 import { ElectionDayNotice } from './stateless/election-day'
+import Switcher from './stateless/switcher.js'
 
 export function PollingPlaceDirections({
+  children,
   address: backupAddress,
+  notFound,
   voterInfo,
   queryParams,
   onChangeAddress,
-  onClickDirections
+  onClickDirections,
+  onSwitchToEarlyVoting
 }) {
   const address = voterInfo.address || backupAddress
   const state = getState(address.state)
@@ -25,7 +30,7 @@ export function PollingPlaceDirections({
   const pollingPlace = POLLING_PLACE_DATA[state.abbr] || {}
   const { earlyVotingTimeLeft, earlyLocations, locations = [] } = voterInfo
 
-  if (locations && locations.length === 0) {
+  if (notFound || (locations && locations.length === 0)) {
     return (
       <PollingPlaceNotFound
         address={address}
@@ -59,7 +64,7 @@ export function PollingPlaceDirections({
 
   return (
     <div className="mt3 w-100">
-      <div className="mt1">
+      <div className="mt1 mb2">
         You can vote here {votingDate} from{' '}
         <span className="dib">
           <span className="b">
@@ -72,22 +77,12 @@ export function PollingPlaceDirections({
         <br />
       </div>
 
-      {!isElectionDay &&
-        earlyVoting &&
-        earlyLocations &&
-        earlyLocations.length > 0 && (
-          <div className="mt2 f5-ns f6 gray">
-            In {state.name}, you can also vote <i>before</i> Election Day —{' '}
-            <a
-              className="link blue underline-hover pointer"
-              href="https://www.vote.org/early-voting-calendar/"
-              target="_blank"
-            >
-              find your early voting information
-            </a>
-            .
-          </div>
-        )}
+      {!isElectionDay && (
+        <Switcher
+          earlyVotingTimeLeft={earlyVotingTimeLeft}
+          onSwitchToEarlyVoting={onSwitchToEarlyVoting}
+        />
+      )}
 
       <div className="outdent">
         <div className="directions directions-small mt3 mb1 flex-ns flex-row-ns">
@@ -108,7 +103,6 @@ export function PollingPlaceDirections({
                   className="directions-address1"
                   address={locationAddress}
                 />
-                <DirectionsDate />
                 <DirectionsHours
                   location={location}
                   pollingPlace={pollingPlace}
@@ -116,6 +110,7 @@ export function PollingPlaceDirections({
                 <EarlyVotingCTA
                   isElectionDay={isElectionDay}
                   timeLeft={earlyVotingTimeLeft}
+                  onClick={onSwitchToEarlyVoting}
                 />
                 <ElectionDayNotice isElectionDay={isElectionDay} />
               </div>
@@ -168,13 +163,13 @@ export function PollingPlaceDirections({
             </div>
           </div>
         </div>
-        <div className="cf" style={{ fontSize: 12 }}>
+        <div className="cf mb2" style={{ fontSize: 12 }}>
           <div className="fr">
             <GoogleReportForm address={address} />
           </div>
         </div>
       </div>
-      {/* <PollingPlacePlan /> */}
+      {children}
     </div>
   )
 }

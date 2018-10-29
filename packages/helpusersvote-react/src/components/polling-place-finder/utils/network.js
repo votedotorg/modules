@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch'
 import { toAddr } from './address'
-import { CIVIC_INFO_API_KEY } from './settings'
+import { reportError } from './errors'
+import { CIVIC_INFO_API_KEY, EVENTS_API_HOST } from './settings'
 
 export function fetchVoterInfo({ address }) {
   const shouldUseGoogleApi = true
@@ -11,14 +12,12 @@ export function fetchVoterInfo({ address }) {
   return req
 }
 
-const eventsApiHost = 'https://events-api.helpusersvote.com'
-
 export function sendEvents(events) {
   if (!events || events.length === 0) {
     return Promise.resolve()
   }
 
-  return fetch(`${eventsApiHost}/v1/track`, {
+  return fetch(`${EVENTS_API_HOST}/v1/track`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -46,9 +45,13 @@ const googleCivicInfoApiHost =
 
 function getCivicInfoApiRequest({ address }) {
   const addr = toAddr(address)
-  const url = `${googleCivicInfoApiHost}?key=${CIVIC_INFO_API_KEY}&address=${addr}&electionId=${electionId}&returnAllAvailableData=true`
+  const url = `${googleCivicInfoApiHost}?key=${CIVIC_INFO_API_KEY}&electionId=${electionId}&returnAllAvailableData=true&address=${encodeURIComponent(
+    addr
+  )}`
 
-  return fetch(url).then(r => r.json())
+  return fetch(url)
+    .then(r => r.json())
+    .catch(reportError)
 }
 
 export default {

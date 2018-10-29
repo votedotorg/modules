@@ -2,7 +2,8 @@ import React from 'react'
 
 export function PollingPlaceFinderError() {
   const stateSite = false
-  const stateOfficeSite = 'https://www.vote.org/polling-place-locator/#table'
+  const stateOfficeSite =
+    'https://www.usvotefoundation.org/vote/eoddomestic.htm'
 
   return (
     <div className="mt3 w-100">
@@ -13,7 +14,8 @@ export function PollingPlaceFinderError() {
               <div className="directions-label">There was an error</div>
               <p className="lh-copy">
                 Our engineers are looking into why this issue occurred. You can
-                contact your local election office to find your polling place.
+                contact your local election office to find your{' '}
+                <span className="dib">polling place.</span>
               </p>
               <a
                 className="huv-button huv-button--blue tc dib"

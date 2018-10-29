@@ -4,3 +4,5 @@ import PollingPlaceFinder from './polling-place-finder'
 PollingPlaceFinder.Styles = PollingPlaceFinderStyles
 
 export { PollingPlaceFinder }
+
+export default PollingPlaceFinder

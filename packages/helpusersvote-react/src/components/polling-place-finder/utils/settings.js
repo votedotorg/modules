@@ -10,7 +10,7 @@ function get(key) {
   return ''
 }
 
-const isProd = get('NODE_ENV') === 'prod'
+const isProd = get('NODE_ENV') === 'production'
 
 // Defaults
 const defaultSentryDSN = isProd
@@ -19,10 +19,14 @@ const defaultSentryDSN = isProd
   : // helpusersvote-dev
     'https://b121b5814f7e42fcb280586d93192087@sentry.io/1306374'
 
+export const EVENTS_API_HOST = isProd
+  ? 'https://events-api.helpusersvote.com'
+  : 'https://events-api.staging.helpusersvote.com'
+
 // Exports
 export const CIVIC_INFO_API_KEY = get('CIVIC_INFO_API_KEY')
-export const GMAPS_API_SIGNATURE_SECRET = get('GMAP_API_SIGNATURE_SECRET')
 export const GMAPS_API_KEY = get('GMAPS_API_KEY')
+export const GMAPS_API_SIGNATURE_SECRET = get('GMAPS_API_SIGNATURE_SECRET')
 export const SENTRY_DSN = get('SENTRY_DSN') || defaultSentryDSN
 
 export default {

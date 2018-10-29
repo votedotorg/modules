@@ -1,11 +1,25 @@
 const glob = require('glob')
+const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
-const minimizer = []
 const isProd = process.env.NODE_ENV === 'production'
+const devtool = isProd ? false : 'source-map'
+const modules = ['node_modules']
+const minimizer = []
+const plugins = []
 
 if (isProd) {
-  minimizer.push(new UglifyJsPlugin())
+  minimizer.push(
+    new UglifyJsPlugin({
+      sourceMap: true
+    })
+  )
+
+  plugins.push(
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[name].js.map'
+    })
+  )
 }
 
 const mode = isProd ? 'production' : 'development'
@@ -26,14 +40,12 @@ const entry = glob
 module.exports = {
   mode,
   entry,
+  devtool,
   output: {
     filename: '[name].js',
     path: __dirname + '/dist'
   },
-  resolve: {
-    modules: ['node_modules']
-  },
-  optimization: {
-    minimizer
-  }
+  plugins,
+  resolve: { modules },
+  optimization: { minimizer }
 }

@@ -1,37 +1,37 @@
 {
   "AK": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": false,
     "who": "all"
   },
   "AR": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": false,
     "who": "all"
   },
   "AZ": {
-    "starts_at": "2016-10-12",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-12",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "missing_locations_text": "Early voting dates vary by county. Some close on Friday, November 4, and others are open through Monday, November 7.",
     "same_day_reg": false,
     "who": "all"
   },
   "CA": {
-    "starts_at": "2016-10-11",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-11",
+    "ends_at": "2018-11-05",
     "ends_at_time": 20,
     "missing_locations_text": "Early voting dates vary by county, with most closing on Sunday, Nov 6 or Monday, Nov 7.",
     "same_day_reg": false,
     "who": "all"
   },
   "CO": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-08",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-05",
     "ends_at_time": 18,
     "additional_text": "Every Colorado voter receives a ballot in the mail, but you can still vote in person at a Voter Service and Polling Center if you'd like.",
     "same_day_reg": true,
@@ -39,8 +39,8 @@
     "who": "all"
   },
   "DC": {
-    "starts_at": "2016-10-28",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-28",
+    "ends_at": "2018-11-04",
     "ends_at_time": 19,
     "missing_locations_text": "You can vote early starting October 22 at One Judiciary Square and October 28 at all other locations.",
     "state_site": "https://www.dcboee.org/ev/",
@@ -50,15 +50,15 @@
   },
   "DE": {
     "starts_at": null,
-    "ends_at": "2016-11-07",
+    "ends_at": "2018-11-05",
     "override_text": "In Delaware, if you cannot vote in person on Election Day, you can vote absentee in-person, but you must have an excuse. Absentee voting starts as soon as absentee ballots are available, and ends November 7.",
     "state_site": "http://elections.delaware.gov/voter/absenteeballot.shtml",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](http://elections.delaware.gov/pubs/pdfs/AbsenteeVoting_CantGoToThePolls.pdf), you can vote early."
   },
   "FL": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-06",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-05",
     "ends_at_time": 20,
     "override_text": "Depending on your county, early voting starts between October 24 and October 29, and ends on either November 5 or November 6.",
     "state_site": "http://dos.myflorida.com/elections/for-voters/voting/early-voting/",
@@ -66,31 +66,31 @@
     "who": "all"
   },
   "GA": {
-    "starts_at": "2016-10-17",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-17",
+    "ends_at": "2018-11-04",
     "ends_at_time": 19,
     "missing_locations_text": "Early voting start and end times may vary by county. The standard dates are October 17 through November 4.",
     "same_day_reg": false,
     "who": "all"
   },
   "HI": {
-    "starts_at": "2016-10-25",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-10-25",
+    "ends_at": "2018-11-05",
     "ends_at_time": 16,
     "same_day_reg": false,
     "who": "all"
   },
   "IA": {
-    "starts_at": "2016-09-29",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-29",
+    "ends_at": "2018-11-05",
     "ends_at_time": 16.5,
     "same_day_reg": true,
     "same_day_reg_note": "You can register at when you go to vote early! You'll need to provide your Iowa driver's license number or if you don't have one, the last 4 digits of your social security number. Even if you don't have these, you can still register!\n\nYou must also bring one of the following:\n\n* Iowa driver's license\n* Iowa non-operator's ID card\n* U.S. Passport\n* U.S. military ID card\n* ID card issued by an employer or\n* A student ID card issued by an Iowa high school or an Iowa college\n\nIf your photo ID doesn't have your current address, you'll also need another document that shows your name and current address.",
     "who": "all"
   },
   "ID": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-04",
     "ends_at_time": 17,
     "missing_locations_text": "Some counties may start earlier than October 24.",
     "same_day_reg": true,
@@ -98,8 +98,8 @@
     "who": "all"
   },
   "IL": {
-    "starts_at": "2016-09-29",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-29",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "missing_locations_text": "Some early voting locations open September 29, while others open October 24.",
     "same_day_reg": true,
@@ -107,100 +107,100 @@
     "who": "all"
   },
   "IN": {
-    "starts_at": "2016-10-12",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-12",
+    "ends_at": "2018-11-05",
     "ends_at_time": 12,
     "same_day_reg": false,
     "who": "all"
   },
   "KS": {
-    "starts_at": "2016-10-19",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-19",
+    "ends_at": "2018-11-05",
     "ends_at_time": 12,
     "missing_locations_text": "In some counties early voting starts as early as October 19. Early voting is open in all counties from November 1 through November 7.",
     "same_day_reg": false,
     "who": "all"
   },
   "KY": {
-    "starts_at": "2016-10-21",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-21",
+    "ends_at": "2018-11-05",
     "additional_text": "You can only vote early if you cannot vote in person on Election Day.",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](http://elect.ky.gov/voterinfo/pages/absenteevoterinformation.aspx), you can vote early."
   },
   "LA": {
-    "starts_at": "2016-10-25",
-    "ends_at": "2016-11-01",
+    "starts_at": "2018-10-25",
+    "ends_at": "2018-11-01",
     "same_day_reg": false,
     "who": "all"
   },
   "MA": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-04",
     "ends_at_time": 18,
     "state_site": "http://www.sec.state.ma.us/EarlyVotingWeb/EarlyVotingSearch.aspx",
     "same_day_reg": false,
     "who": "all"
   },
   "MD": {
-    "starts_at": "2016-10-27",
-    "ends_at": "2016-11-03",
+    "starts_at": "2018-10-27",
+    "ends_at": "2018-11-03",
     "same_day_reg": false,
     "who": "all"
   },
   "ME": {
-    "starts_at": "2016-10-11",
-    "ends_at": "2016-11-03",
+    "starts_at": "2018-10-11",
+    "ends_at": "2018-11-03",
     "same_day_reg": false,
     "who": "all"
   },
   "MI": {
     "starts_at": null,
-    "ends_at": "2016-11-07",
+    "ends_at": "2018-11-05",
     "override_text": "In Michigan, if you cannot vote in person on Election Day, you can vote absentee in-person, but you must have an excuse. Absentee voting starts as soon as absentee ballots are available, and ends 5pm on November 7.",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](http://www.michigan.gov/sos/0,4670,7-127-1633_8716_8728-21037--,00.html), you can vote early."
   },
   "MN": {
-    "starts_at": "2016-09-23",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-23",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": false,
     "who": "all"
   },
   "MS": {
-    "starts_at": "2016-10-29",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-10-29",
+    "ends_at": "2018-11-05",
     "override_text": "In Mississippi, if you cannot vote in person on Election Day, you can vote absentee in-person, but you must have an excuse. Absentee voting starts October 29, and ends on November 5, at 5pm.",
     "source": "vote.org",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](https://ballotpedia.org/Voting_in_Mississippi#Absentee_voting), you can vote early."
   },
   "MO": {
-    "starts_at": "2016-10-27",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-27",
+    "ends_at": "2018-11-05",
     "override_text": "In Missouri, if you cannot vote in person on Election Day, you can vote absentee in-person, but you must have an excuse. Absentee voting starts on October 27, and ends on November 7, at 5pm.",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](https://www.sos.mo.gov/elections/goVoteMissouri/howtovote#Absentee), you can vote early."
   },
   "MT": {
-    "starts_at": "2016-10-11",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-11",
+    "ends_at": "2018-11-05",
     "ends_at_time": 12,
     "same_day_reg": true,
     "same_day_reg_note": "You can return your register at your [county election office](http://sos.mt.gov/elections/forms/elections/electionadministrators.pdf) by Monday, November 7 at noon. You'll need to provide your Montana driver's license or ID card number, or if you don't have one, the last 4 digits of your Social Security number.\n\nIf you don't have any of the above, bring a photocopy of an ID or document that shows your name and current address, such as a paycheck stub, utility bill, bank statement, or other government document.",
     "who": "all"
   },
   "NC": {
-    "starts_at": "2016-10-20",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-10-20",
+    "ends_at": "2018-11-05",
     "ends_at_time": 13,
     "same_day_reg": false,
     "who": "all"
   },
   "ND": {
     "starts_at": null,
-    "ends_at": "2016-11-07",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "missing_locations_text": "In North Dakota, early voting start and end times vary by county. Most counties close between Friday, Nov 4 and Monday, Nov 7.",
     "same_day_reg": false,
@@ -208,56 +208,56 @@
     "who": "all"
   },
   "NE": {
-    "starts_at": "2016-10-11",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-11",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": false,
     "who": "all"
   },
   "NJ": {
-    "starts_at": "2016-10-08",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-08",
+    "ends_at": "2018-11-05",
     "override_text": "Early voting in New Jersey starts as soon as ballots are available. The exact start times vary by county, so it's best to call your Local Election Official and ask. And it ends at 3pm on November 7.",
     "same_day_reg": false,
     "who": "all"
   },
   "NH": {
     "starts_at": null,
-    "ends_at": "2016-11-07",
+    "ends_at": "2018-11-05",
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](https://ballotpedia.org/Voting_in_New_Hampshire#Absentee_voting), you can vote early."
   },
   "NM": {
-    "starts_at": "2016-10-11",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-10-11",
+    "ends_at": "2018-11-05",
     "ends_at_time": 18,
     "same_day_reg": false,
     "who": "all"
   },
   "NV": {
-    "starts_at": "2016-10-22",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-22",
+    "ends_at": "2018-11-04",
     "ends_at_time": 20,
     "state_site": "http://nvsos.gov/sos/elections/voters/early-voting-information",
     "same_day_reg": false,
     "who": "all"
   },
   "NY": {
-    "starts_at": "2016-10-07",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-07",
+    "ends_at": "2018-11-05",
     "override_text": "In New York, if you cannot vote in person on Election Day, you can request an absentee ballot in person through November 7 at your [county board of elections](https://www.elections.ny.gov/CountyBoards.html).",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](https://ballotpedia.org/Voting_in_New_York#Absentee_voting), you can vote early."
   },
   "OH": {
-    "starts_at": "2016-10-12",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-12",
+    "ends_at": "2018-11-05",
     "ends_at_time": 14,
     "same_day_reg": false,
     "who": "all"
   },
   "OK": {
-    "starts_at": "2016-11-03",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-11-03",
+    "ends_at": "2018-11-05",
     "ends_at_time": 14,
     "override_text": "Early voting in Oklahoma is available from 8am to 6pm on Friday, November 4 and Monday, November 7, and 8am to 1pm on Saturday, November 5.",
     "same_day_reg": false,
@@ -265,83 +265,83 @@
   },
   "OR": {
     "starts_at": null,
-    "ends_at": "2016-11-07",
+    "ends_at": "2018-11-05",
     "override_text": "All voters registered in Oregon automatically receive a ballot by mail at the address where they registered to vote. Oregon does not offer in-person early voting.",
     "same_day_reg": false,
     "who": "All registered voters receive mail ballots."
   },
   "SC": {
-    "starts_at": "2016-10-10",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-10",
+    "ends_at": "2018-11-05",
     "override_text": "In South Carolina, if you cannot vote in person on Election Day you can vote \"absentee in-person\" soon as ballots are available. You can apply for and vote your absentee ballot during the same visit to your Local Election Official. Absentee in-person voting is available October 10 through November 7.",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](http://www.scvotes.org/2009/10/15/absentee_voting), you can vote early."
   },
   "SD": {
-    "starts_at": "2016-09-23",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-23",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "missing_locations_text": "Early voting start and end times may vary by county. Some start as early as September 23.",
     "same_day_reg": false,
     "who": "all"
   },
   "TN": {
-    "starts_at": "2016-10-19",
-    "ends_at": "2016-11-03",
+    "starts_at": "2018-10-19",
+    "ends_at": "2018-11-03",
     "same_day_reg": false,
     "who": "all"
   },
   "TX": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-04",
     "ends_at_time": 19,
     "same_day_reg": false,
     "who": "all"
   },
   "UT": {
-    "starts_at": "2016-10-25",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-25",
+    "ends_at": "2018-11-04",
     "same_day_reg": false,
     "who": "all"
   },
   "VA": {
-    "starts_at": "2016-09-23",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-09-23",
+    "ends_at": "2018-11-05",
     "override_text": "In Virginia, if you cannot vote in person on Election Day, you can vote \"absentee in-person\" September 23 through November 5. You can apply for and vote your absentee ballot during the same visit to your Local Election Official.",
     "same_day_reg": false,
     "who": "You can vote early only if you have an excuse for not being able to vote on Election Day, November 8. If you will not be in your city or county on Election Day, or any of the other reasons listed [here](http://www.elections.virginia.gov/casting-a-ballot/absentee-voting/), you can vote early."
   },
   "VT": {
-    "starts_at": "2016-09-23",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-23",
+    "ends_at": "2018-11-05",
     "same_day_reg": false,
     "who": "all"
   },
   "WA": {
-    "starts_at": "2016-10-21",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-10-21",
+    "ends_at": "2018-11-05",
     "additional_text": "All registered voters also automatically receive a mail ballot.",
     "same_day_reg": false,
     "who": "all"
   },
   "WI": {
-    "starts_at": "2016-10-24",
-    "ends_at": "2016-11-04",
+    "starts_at": "2018-10-24",
+    "ends_at": "2018-11-04",
     "override_text": "Early voting ends at 5pm or the close of business (whichever is later) on Friday, November 4. Vote at your [municipal clerk's office](https://myvote.wi.gov/en-US/MyMunicipalClerk).",
     "same_day_reg": true,
     "same_day_reg_note": "You can register to vote when you go vote early at your [municipal clerk's office](https://myvote.wi.gov/en-US/MyMunicipalClerk)! You'll need to provide your Wisconsin driver’s license number or your Wisconsin Department of Transportation-issued ID number, or if you don't have one, the last 4 numbers of your Social Security number. You can still register if you don't have any of these documents.\n\nMake sure to bring [a proof of residence](http://elections.wi.gov/sites/default/files/publication/154/proof_of_residence_guide_pdf_56590.pdf) with you as well!",
     "who": "all"
   },
   "WV": {
-    "starts_at": "2016-10-26",
-    "ends_at": "2016-11-05",
+    "starts_at": "2018-10-26",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": false,
     "who": "all"
   },
   "WY": {
-    "starts_at": "2016-09-29",
-    "ends_at": "2016-11-07",
+    "starts_at": "2018-09-29",
+    "ends_at": "2018-11-05",
     "ends_at_time": 17,
     "same_day_reg": true,
     "same_day_reg_note": "You can register to vote when you vote in-person absentee at your [county clerk's office](https://soswy.state.wy.us/Elections/Docs/WYCountyClerks.pdf). You'll need to provide your Wyoming driver’s license number, or if you don't have you, the last 4 digits of your Social Security number. You can still register if you have none of the above.",

@@ -1,13 +1,5 @@
 import React from 'react'
 
-export function DirectionsDate() {
-  return (
-    <div className="directions-date">
-      November 6<sup style={{ fontSize: 9 }}>th</sup>
-    </div>
-  )
-}
-
 export function DirectionsHours({ location, pollingPlace }) {
   return (
     <div className="directions-hours mt3">
@@ -18,7 +10,9 @@ export function DirectionsHours({ location, pollingPlace }) {
             ? location.hours
             : pollingPlace.hours}
         </div>
-        <div className="fw6 directions-date">Election Day</div>
+        <div className="fw6 directions-date">
+          November 6<sup style={{ fontSize: 9 }}>th</sup>
+        </div>
       </div>
     </div>
   )

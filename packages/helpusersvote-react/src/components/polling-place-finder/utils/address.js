@@ -1,3 +1,6 @@
+import { getQueryParam } from './url'
+import { reportError } from './errors'
+
 /**
  * Render single-line address string.
  *
@@ -49,19 +52,61 @@ export function placeToAddress(place) {
  */
 
 export function fromAddr(str = '') {
-  const parts = str.replace(', USA', '').split(', ')
-  const lastPart = parts.splice(parts.length - 1, 1) || ['']
-  const lastParts = lastPart[0].split(' ')
-  const [state, zip] = lastParts
+  try {
+    const parts = str.replace(/, USA|, United States/, '').split(', ')
+    const lastPart = parts.splice(parts.length - 1, 1) || ['']
+    const lastParts = lastPart[0].split(' ')
+    const [state, zip] = lastParts
 
-  return {
-    line1: parts[0] || '',
-    city: parts[1] || '',
-    state,
-    zip
+    return {
+      line1: parts[0] || '',
+      city: parts[1] || '',
+      state,
+      zip
+    }
+  } catch (err) {
+    reportError(err)
+    return null
   }
 }
 
+/**
+ * Parse query string for address.
+ *
+ * @param {String}
+ * @return {Object}
+ */
+
+export function getQueryAddress() {
+  const addr = getQueryParam('addr') || getQueryParam('address')
+
+  if (addr) {
+    const address = fromAddr(addr)
+
+    if (address) {
+      return Object.assign({ _fromQuery: true }, address)
+    }
+  }
+
+  const line1 = getQueryParam('street_address') || getQueryParam('line1')
+  const city = getQueryParam('city')
+  const state = getQueryParam('state_abbr') || getQueryParam('state')
+  const zip = getQueryParam('zip_5') || getQueryParam('zip')
+
+  if (line1 && city && state && zip) {
+    return {
+      line1,
+      city,
+      state,
+      zip,
+      _fromQuery: true
+    }
+  }
+
+  return null
+}
+
+<<<<<<< HEAD
 /**
  * Parse query string for address.
  *
@@ -89,4 +134,6 @@ export function getQueryAddress() {
   return null
 }
 
+=======
+>>>>>>> 69270f70d4384f7a704f71605b83e9bafdc76a29
 export default { fromAddr, toAddr, placeToAddress, getQueryAddress }

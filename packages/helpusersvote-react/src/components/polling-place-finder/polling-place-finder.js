@@ -1,5 +1,3 @@
-import 'url-search-params-polyfill'
-
 import React, { Component } from 'react'
 import PollingPlaceFinderError from './stateless/polling-place-finder-error'
 import PollingPlaceDirections from './polling-place-directions'
@@ -17,13 +15,20 @@ import {
   getEncryptedAddress,
   setEncryptedAddress,
   getEncryptedVoterInfo,
-  setEncryptedVoterInfo
+  setEncryptedVoterInfo,
+  getQueryParam
 } from './utils'
 
 class PollingPlaceFinder extends Component {
   render() {
-    const { onSelectAddress, onChangeAddress, onClickDirections } = this
-    const { type, children } = this.props
+    const {
+      onSelectAddress,
+      onChangeAddress,
+      onClickDirections,
+      onSwitchToEarlyVoting,
+      onSwitchToPollingPlace
+    } = this
+    const { notFound, children, directionsChildren } = this.props
     const {
       ready,
       address,
@@ -33,6 +38,8 @@ class PollingPlaceFinder extends Component {
       shouldUseAutocomplete
     } = this.state
 
+    const type = this.state.overrideType || this.props.type
+
     if (!ready) {
       return <div className="huv-container" />
     }
@@ -41,6 +48,28 @@ class PollingPlaceFinder extends Component {
       return (
         <div className="huv-container">
           <PollingPlaceFinderError />
+        </div>
+      )
+    }
+
+    if (notFound && address) {
+      const directionsProps = {
+        address,
+        notFound,
+        voterInfo,
+        queryParams,
+        onChangeAddress,
+        onClickDirections,
+        onSwitchToEarlyVoting
+      }
+
+      return type ? (
+        <div className="huv-container">
+          <EarlyVotingDirections {...directionsProps} />
+        </div>
+      ) : (
+        <div className="huv-container">
+          <PollingPlaceDirections {...directionsProps} />
         </div>
       )
     }
@@ -71,6 +100,8 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            onSwitchToPollingPlace={onSwitchToPollingPlace}
+            children={directionsChildren}
           />
         )
       } else {
@@ -81,6 +112,8 @@ class PollingPlaceFinder extends Component {
             queryParams={queryParams}
             onChangeAddress={onChangeAddress}
             onClickDirections={onClickDirections}
+            onSwitchToEarlyVoting={onSwitchToEarlyVoting}
+            children={directionsChildren}
           />
         )
       }
@@ -149,8 +182,18 @@ class PollingPlaceFinder extends Component {
   }
 
   prepareState = async () => {
+<<<<<<< HEAD
     const address = getQueryAddress() || await getEncryptedAddress()
+=======
+    const address =
+      this.props.address || getQueryAddress() || (await getEncryptedAddress())
+>>>>>>> 69270f70d4384f7a704f71605b83e9bafdc76a29
     const voterInfo = await this.getVoterInfo({ address })
+
+    // If we're getting linked here, set the address
+    if (address && address._fromQuery) {
+      // TODO: check if that's expected UX
+    }
 
     if (address && !(voterInfo && voterInfo.address)) {
       console.log('polls.componentDidMount: found address but no voter info')
@@ -171,9 +214,8 @@ class PollingPlaceFinder extends Component {
     }
 
     try {
-      const s = new URLSearchParams(window.location.search)
-      const queryParams = {
-        election: this.props.electionDay || s.get('election') !== null
+      const queryParams = this.props.queryParams || {
+        election: this.props.electionDay || Boolean(getQueryParam('election'))
       }
 
       this.setState({
@@ -196,7 +238,7 @@ class PollingPlaceFinder extends Component {
       return null
     }
 
-    const { alwaysUseNetwork = true } = this.props
+    const { alwaysUseNetwork } = this.props
 
     if (alwaysUseNetwork) {
       return await this.loadVoterInfo(address)
@@ -220,11 +262,12 @@ class PollingPlaceFinder extends Component {
     setEncryptedAddress(address)
 
     const voterInfo = await this.loadVoterInfo(address)
+    const { type } = this.props
 
-    setEncryptedVoterInfo(voterInfo)
     this.setState({ address, voterInfo })
 
     const properties = {
+      type,
       state: address.state
     }
 
@@ -240,8 +283,70 @@ class PollingPlaceFinder extends Component {
     setEncryptedAddress(address)
     setEncryptedVoterInfo(voterInfo)
 
-    trackEvent({ name: 'Address Changed' })
+    const { type } = this.props
+
+    trackEvent({ name: 'Address Changed', properties: { type } })
   }
+
+  onSwitchToEarlyVoting = () => {
+    this.setState({
+      overrideType: 'early'
+    })
+
+    const { type } = this.props
+    const { address } = this.state
+
+    const path = getPagePath({ type, to: 'early' })
+    const pageview = {
+      name: 'Early Voting Finder',
+      properties: { path, from: 'polls' }
+    }
+
+    if (address && address.state) {
+      pageview.properties.state = address.state
+    }
+
+    trackPageview(pageview)
+  }
+
+  onSwitchToPollingPlace = () => {
+    this.setState({
+      overrideType: 'polls'
+    })
+
+    const { type } = this.props
+    const { address } = this.state
+
+    const path = getPagePath({ type, to: 'polls' })
+    const pageview = {
+      name: 'Polling Place Finder',
+      properties: { path, from: 'early' }
+    }
+
+    if (address && address.state) {
+      pageview.properties.state = address.state
+    }
+
+    trackPageview(pageview)
+  }
+}
+
+function getPagePath({ type, to }) {
+  if (type === 'early') {
+    if (to === 'polls') {
+      return '/polls'
+    }
+  } else {
+    if (to === 'early') {
+      return '/early'
+    }
+  }
+
+  return '/'
+}
+
+PollingPlaceFinder.defaultProps = {
+  alwaysUseNetwork: true
 }
 
 export default PollingPlaceFinder

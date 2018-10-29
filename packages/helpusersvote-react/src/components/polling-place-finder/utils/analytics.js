@@ -1,42 +1,7 @@
 import AEvent from 'analytics-event'
-import * as Sentry from '@sentry/browser'
+import { getQueryParam } from './url'
+import { reportError } from './errors'
 import { sendEvents } from './network'
-import { SENTRY_DSN } from './settings'
-
-const dsn = SENTRY_DSN
-let hasInit
-
-if (dsn) {
-  Sentry.init({ dsn })
-  hasInit = true
-}
-
-export function reportError(error, info) {
-  if (!hasInit) {
-    if (!dsn) {
-      console.warn('huv: could not find `SENTRY_DSN` setting value')
-      return
-    }
-
-    Sentry.init({ dsn })
-  }
-
-  // De-risk error handling
-  try {
-    if (info) {
-      Sentry.withScope(scope => {
-        // Attach extra info to Sentry error scope
-        Object.keys(info).forEach(k => scope.setExtra(k, info[k]))
-        Sentry.captureException(error)
-      })
-    } else {
-      Sentry.captureException(error)
-    }
-  } catch (err) {
-    console.warn('huv: failed reporting to sentry')
-    console.log(err)
-  }
-}
 
 const batch = []
 const EVENT_BATCH_SIZE = 10
@@ -98,14 +63,19 @@ export function trackPageview(input = {}) {
     }
 
     const title = input.name || document.title
-    const path = window.location.pathname
+    const path = input.path || window.location.pathname
+    const url = input.url || window.location.href
 
     if (title) {
       properties.title = title
     }
 
-    if (path) {
+    if (path && !properties.path) {
       properties.path = path
+    }
+
+    if (url && !properties.url) {
+      properties.url = url
     }
 
     track({
@@ -177,14 +147,18 @@ const utmParams = [
 
 function getUTM() {
   try {
-    const params = new URLSearchParams(window.location.search)
     const campaign = {}
+    let utmEmpty = true
 
     utmParams.forEach(({ param, key }) => {
-      if (params.get(param)) {
-        campaign[key] = params.get(param)
+      if (getQueryParam(param)) {
+        campaign[key] = getQueryParam(param)
       }
     })
+
+    if (utmEmpty) {
+      return null
+    }
 
     return campaign
   } catch (err) {

@@ -6,6 +6,8 @@ import { withKnobs, text, number, boolean } from '@storybook/addon-knobs'
 import {
   Banner,
   Modal,
+  Ballot,
+  PlanMaker,
   Countdown,
   ShouldShowCTA,
   PollingPlaceFinder
@@ -187,7 +189,7 @@ storiesOf('Should Show CTA', module)
     )
   })
 
-const POLLING_PLACE_FINDER_CLASSES = 'ph5-ns ph2 center'
+const POLLING_PLACE_FINDER_CLASSES = 'ph5-ns ph2 pb4 center'
 
 storiesOf('Polling Place Finder', module)
   .addDecorator(
@@ -207,10 +209,44 @@ storiesOf('Polling Place Finder', module)
       <PollingPlaceFinder type="early" />
     </div>
   ))
+  .add('Make a Plan', () => {
+    const children = (
+      <div className="mb4">
+        <PlanMaker.Styles />
+        <PlanMaker />
+      </div>
+    )
+
+    return (
+      <div className={POLLING_PLACE_FINDER_CLASSES}>
+        <PollingPlaceFinder.Styles />
+        <PollingPlaceFinder directionsChildren={children} />
+      </div>
+    )
+  })
   .add('Election Day', () => (
     <div className={POLLING_PLACE_FINDER_CLASSES}>
       <PollingPlaceFinder.Styles />
       <PollingPlaceFinder electionDay />
+    </div>
+  ))
+  .add('Not Found', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder
+        notFound
+        address={{ line1: '123 Main St', city: 'Farmsville', state: 'VA' }}
+      />
+    </div>
+  ))
+  .add('Not Found · Early', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <PollingPlaceFinder
+        notFound
+        type="early"
+        address={{ line1: '123 Main St', city: 'Farmsville', state: 'VA' }}
+      />
     </div>
   ))
   .add('Error Preview', () => (
@@ -225,3 +261,17 @@ storiesOf('Polling Place Finder', module)
 function FakeError() {
   throw new Error('simulated fake error for Storybook')
 }
+
+storiesOf('Ballot', module)
+  .addDecorator(
+    withOptions({
+      showAddonPanel: false
+    })
+  )
+  .add('Default', () => (
+    <div className={POLLING_PLACE_FINDER_CLASSES}>
+      <PollingPlaceFinder.Styles />
+      <Ballot.Styles />
+      <Ballot />
+    </div>
+  ))

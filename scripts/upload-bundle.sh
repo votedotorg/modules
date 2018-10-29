@@ -19,11 +19,11 @@ npm install \
 
 echo "Building Help Users Vote React components..."
 cd packages/helpusersvote-react/ \
-	&& npm run build
+	&& NODE_ENV=production npm run build
 
 echo "Building Help Users Vote bundle..."
 cd ../helpusersvote-bundle/ \
-	&& npm run build
+	&& NODE_ENV=production npm run build
 
 # Don't have `aws` installed? Try this:
 # pip install awscli --upgrade --user

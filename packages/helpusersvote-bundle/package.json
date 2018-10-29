@@ -17,7 +17,7 @@
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
-    "@helpusersvote/react": "^1.1.5",
+    "@helpusersvote/react": "^1.1.9",
     "domready": "^1.0.8",
     "glob": "^7.1.2",
     "prop-types": "^15.6.2",

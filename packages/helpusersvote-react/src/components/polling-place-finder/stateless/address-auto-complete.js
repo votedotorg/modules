@@ -5,6 +5,7 @@ import {
   fetchAutocompletePlaces,
   fetchGeocoding,
   placeToAddress,
+  reportError,
   fromAddr,
   toAddr
 } from '../utils'
@@ -17,6 +18,10 @@ export class AddressAutoComplete extends Component {
 
     this.setState({ inputValue })
 
+    if (this.props.onAutocompleteValueChange) {
+      this.props.onAutocompleteValueChange(inputValue)
+    }
+
     const notFoundState = {
       activeIndex: 0,
       places: [
@@ -28,23 +33,32 @@ export class AddressAutoComplete extends Component {
     }
 
     if (!inputValue || inputValue.length < 3) {
-      this.setState(notFoundState)
+      this.setState({
+        activeIndex: 0,
+        places: []
+      })
 
       return inputValue
     }
 
-    fetchAutocompletePlaces({ input: inputValue }).then(places => {
-      if (!places || places.length === 0) {
-        this.setState(notFoundState)
+    fetchAutocompletePlaces({ input: inputValue })
+      .then(places => {
+        if (!places || places.length === 0) {
+          this.setState(notFoundState)
 
-        return
-      }
+          return
+        }
 
-      this.setState({
-        activeIndex: 0,
-        places
+        this.setState({
+          activeIndex: 0,
+          places
+        })
       })
-    })
+      .catch(err => {
+        if (err) reportError(err)
+
+        this.setState(notFoundState)
+      })
 
     return inputValue
   }
@@ -59,8 +73,8 @@ export class AddressAutoComplete extends Component {
       const result = results[0] || {}
       const address = fromAddr(result.formatted_address || '')
 
-      if (this.props.onChange) {
-        this.props.onChange(address)
+      if (this.props.onAutocompleteSelectAddress) {
+        this.props.onAutocompleteSelectAddress(address)
       }
     })
   }
@@ -110,13 +124,18 @@ export class AddressAutoComplete extends Component {
       <div className="w-100">
         <input
           required
+          autoFocus
           type="text"
+          name="line1"
+          autoComplete="off"
           value={inputValue}
           onChange={this.onInputChange}
           onKeyDown={this.onKeyDown}
-          placeholder="Enter your home address"
           className="mw-100 w-100 f4-ns f5 input-reset ba b--black-20 pa2 border-box br1"
         />
+        <div className="address-form-auto-complete-example">
+          e.g. 1600 Pennsylvania Ave NW, Washington, DC 20500
+        </div>
         <Options
           list={places}
           inputValue={inputValue}

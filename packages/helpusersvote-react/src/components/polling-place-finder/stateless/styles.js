@@ -2,12 +2,15 @@ import React from 'react'
 
 const styles = `
 .huv-container {
-  padding: 0 2px;
   font-family: SF UI Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
 }
 .huv-container .gray,
 .huv-container .light-gray {
   color: #69778b;
+}
+.outdent,
+.huv-switcher {
+  margin: 0 2px;
 }
 .huv-button {
   -webkit-font-smoothing: antialiased;
@@ -19,20 +22,20 @@ const styles = `
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: #016cd1;
-  color: white;
+  background: #fff;
+  color: rgb(66, 90, 112);
   font-weight: 500;
   line-height: 32px;
   height: 32px;
-  padding: 0;
+  padding: 0 16px;
   min-width: 80px;
   border-radius: 3px;
   font-size: 12px;
   box-sizing: border-box;
-  background-image: -webkit-linear-gradient(to top, #0165c7, #0173df);
-  background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
-  background-image: linear-gradient(to top, #0165c7, #0173df);
-  box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
+  background-image: -webkit-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  background-image: -moz-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  background-image: linear-gradient(to bottom, #FFFFFF, #F4F5F7);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px -1px 1px 0px inset;
   -webkit-transition: box-shadow 80ms ease-in-out;
   -moz-transition: box-shadow 80ms ease-in-out;
 }
@@ -41,10 +44,23 @@ const styles = `
   z-index: 2;
   box-shadow: 0 0 0 3px rgba(1,108,209,0.301), inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
 }
+.huv-button:hover {
+  background-image: -webkit-linear-gradient(to bottom, #FAFBFB, #EAECEE);
+  background-image: -moz-linear-gradient(to bottom, #FAFBFB, #EAECEE);
+  background-image: linear-gradient(to bottom, #FAFBFB, #EAECEE);
+}
+.huv-button:active {
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
 .huv-button--blue {
+  color: #fff;
+  background-color: #015ebd;
+  box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
   background-image: -webkit-linear-gradient(to top, #0165c7, #0173df);
-  background-image: -moz-linear-gradient(to top, #0165c7, #0173df)
-  background-image: linear-gradient(to top, #0165c7, #0173df);
+  background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
+  background-image: linear-gradient(to bottom, #0788DE, #116AB8);
 }
 .huv-button--blue:hover {
   background-image: -webkit-linear-gradient(to top, #015ebd, #016cd1);
@@ -70,6 +86,11 @@ const styles = `
 }
 .huv-address-form-content {
   padding: 16px;
+}
+.address-form-auto-complete-example {
+  padding: 4px .5rem;
+  font-size: 12px;
+  color: #596573;
 }
 .report-error {
   background: none;
@@ -133,8 +154,13 @@ const styles = `
 
 .directions-info {
   padding: 1em;
+  max-width: 320px;
 }
-
+@media(min-width: 330px) {
+  .directions-info {
+    min-width: 260px;
+  }
+}
 .directions-label {
   margin-bottom: 8px;
   font-size: 12px;
@@ -217,6 +243,59 @@ const styles = `
   font-size: 14px;
   line-height: 24px;
   color: #000;
+}
+/*
+ * Switcher
+ */
+.huv-switcher {
+  display: flex;
+}
+.huv-switcher-item {
+  padding: 6px 10px;
+  min-width: 100px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  user-select: none;
+  text-align: center;
+  color: rgb(66, 90, 112);
+  background-color: white;
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(244, 245, 247));
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px -1px 1px 0px inset;
+  box-sizing: border-box;
+  transition: box-shadow 80ms ease-in-out 0s;
+}
+.huv-switcher-item:hover {
+  background-image: linear-gradient(rgb(250, 251, 251), rgb(234, 236, 238));
+}
+.huv-switcher-item:active {
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
+.huv-switcher-item--active,
+.huv-switcher-item--active:hover,
+.huv-switcher-item--active:active {
+  cursor: default;
+  background-image: none;
+  background-color: rgba(16, 112, 202, 0.09);
+  box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+              rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
+}
+.huv-switcher-item:first-of-type {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.huv-switcher-item:not(:first-of-type) {
+  margin-left: -1px;
+}
+.huv-switcher-item:last-of-type {
+  border-left: none;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
 }`
 
 const css = { __html: styles }

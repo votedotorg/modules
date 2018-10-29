@@ -13,12 +13,13 @@ const FIELD_PLACEHOLDERS = {
 class AddressForm extends Component {
   render() {
     const { state, props } = this
-    const { title, description } = props
-    const { useAutocomplete } = state
+    const { title } = props
+    const { useAutocomplete, autocompleteActive } = state
     const content = useAutocomplete ? (
       <AddressAutocomplete
         onToggleAutocomplete={this.onToggleAutocomplete}
-        onChange={this.onAutocompleteChange}
+        onAutocompleteValueChange={this.onAutocompleteValueChange}
+        onAutocompleteSelectAddress={this.onAutocompleteSelectAddress}
       />
     ) : (
       addressFields.map((field, index) => (
@@ -50,20 +51,15 @@ class AddressForm extends Component {
           <h1 className="heading">{title}</h1>
         </div>
         <div className="huv-address-form-content">
-          <div className="mt1 mb3 f5 f4-ns">{description}</div>
+          <div className="mt1 mb3 f5 f4-ns">Enter your address:</div>
           <div className="flex flex-wrap">{content}</div>
-          <div className="mt3 flex justify-center">
-            <Button
-              is="button"
-              width={100}
-              display="block"
-              textAlign="center"
-              appearance="blue"
-              onClick={this.onSubmit}
-            >
-              Go!
-            </Button>
-          </div>
+          {autocompleteActive ? null : (
+            <div className="mt3 flex justify-center">
+              <Button width={100} blue onClick={this.onSubmit}>
+                Go!
+              </Button>
+            </div>
+          )}
         </div>
       </form>
     )
@@ -90,7 +86,13 @@ class AddressForm extends Component {
     })
   }
 
-  onAutocompleteChange = address => {
+  onAutocompleteValueChange = value => {
+    const autocompleteActive = Boolean(value && value.length >= 3)
+
+    this.setState({ autocompleteActive })
+  }
+
+  onAutocompleteSelectAddress = address => {
     this.setState({
       ...address
     })
@@ -108,7 +110,10 @@ class AddressForm extends Component {
       return acc
     }, {})
     const invalid =
-      Object.values(address).filter(s => !s || s.length < 2).length > 0 // Confirm the input value is real
+      Object.values(address).filter(
+        // Confirm each state of the relevant values is a string
+        s => typeof s === 'string' && (!s || s.length < 2)
+      ).length > 0
 
     if (invalid) {
       return
@@ -119,11 +124,9 @@ class AddressForm extends Component {
 }
 
 AddressForm.defaultProps = {
+  title: 'Find out where to vote',
   onSelectAddress: () =>
-    console.warn('Missing `onSubmit` for `<AddressForm />`'),
-  title: 'Find your polling place',
-  description:
-    'We’ll find your polling place and hours, so you can go vote on Election Day.'
+    console.warn('Missing `onSubmit` for `<AddressForm />`')
 }
 
 export default AddressForm
