@@ -210,17 +210,10 @@ storiesOf('Polling Place Finder', module)
     </div>
   ))
   .add('Make a Plan', () => {
-    const children = (
-      <div className="mb4">
-        <PlanMaker.Styles />
-        <PlanMaker />
-      </div>
-    )
-
     return (
       <div className={POLLING_PLACE_FINDER_CLASSES}>
         <PollingPlaceFinder.Styles />
-        <PollingPlaceFinder directionsChildren={children} />
+        <PollingPlaceFinder />
       </div>
     )
   })

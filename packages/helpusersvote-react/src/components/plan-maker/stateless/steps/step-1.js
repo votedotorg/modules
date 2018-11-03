@@ -7,16 +7,16 @@ export function Step1({ onSelect }) {
   return (
     <div>
       <Button classes="mr3" blue={false} onClick={onClickSelect('walk')}>
-        Walk (7 min)
+        Walk
       </Button>
       <Button classes="mr3" blue={false} onClick={onClickSelect('drive')}>
-        Drive (2 min)
+        Drive
       </Button>
       <Button classes="mr3" blue={false} onClick={onClickSelect('bike')}>
-        Bike (3 min)
+        Bike
       </Button>
       <Button blue={false} onClick={onClickSelect('transit')}>
-        Bus/Train (11 min)
+        Bus/Train
       </Button>
     </div>
   )

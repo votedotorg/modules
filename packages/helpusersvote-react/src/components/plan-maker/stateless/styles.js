@@ -28,37 +28,50 @@ const styles = `
 }
 
 .add-to-calendar {
+  display: inline-block;
   margin-bottom: 0;
-  width: 154px;
+  padding: 0;
+  width: 162px;
+  box-sizing: border-box;
 }
-
 .react-add-to-calendar {
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
   position: relative;
 }
-
+.react-add-to-calendar__button {
+  display: block;
+  padding: 0 16px;
+}
 .react-add-to-calendar__dropdown {
   position: absolute;
-  left: -15px;
+  margin-top: 4px;
+  width: 162px;
   border-radius: 2px;
-  width: 152px;
-  box-shadow: 1px 3px 6px rgba(0, 0, 0, 0.15);
-  border: 1px solid #a8a8a8;
+  box-shadow: rgba(67, 90, 111, 0.416) 0px 0px 1px, rgba(67, 90, 111, 0.3) 0px 2px 4px -2px;
   background-color: #fff;
   text-align: left;
+  overflow: hidden;
 }
-
-.react-add-to-calendar__dropdown ul{
-  padding-left: 5px;
+.react-add-to-calendar__dropdown ul {
   margin: 0;
+  padding: 0;
 }
-
-.react-add-to-calendar__dropdown a{
+.react-add-to-calendar__dropdown a,
+.react-add-to-calendar__dropdown a:hover,
+.react-add-to-calendar__dropdown a:visited {
+  display: block;
+  padding: 0 6px;
+  color: #357edd;
   text-decoration: none;
 }
-
-.react-add-to-calendar__dropdown i{
+.react-add-to-calendar__dropdown a:hover {
+  background: #F7F9FD;
+}
+.react-add-to-calendar__dropdown li {
+  padding: 0;
+} 
+.react-add-to-calendar__dropdown i {
   margin-right: 5px;
 }
 `

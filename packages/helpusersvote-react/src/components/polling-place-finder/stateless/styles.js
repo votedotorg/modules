@@ -1,4 +1,5 @@
 import React from 'react'
+import PlanMakerStyles from '../../plan-maker/stateless/styles'
 
 const styles = `
 .huv-container {
@@ -51,13 +52,14 @@ const styles = `
   min-width: 80px;
   border-radius: 3px;
   font-size: 12px;
+  user-select: none;
   box-sizing: border-box;
   background-image: -webkit-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
   background-image: -moz-linear-gradient(to bottom, #FFFFFF, #F4F5F7);
   background-image: linear-gradient(to bottom, #FFFFFF, #F4F5F7);
   box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px -1px 1px 0px inset;
-  -webkit-transition: box-shadow 80ms ease-in-out;
-  -moz-transition: box-shadow 80ms ease-in-out;
+  -webkit-transition: box-shadow 80ms ease-in-out, background 80ms ease-in-out;
+  -moz-transition: box-shadow 80ms ease-in-out, background 80ms ease-in-out;
 }
 .huv-button:not([disabled]):not([data-disabled]):focus,
 .huv-button:not([disabled]):not([data-disabled]):focus {
@@ -74,7 +76,7 @@ const styles = `
   background-color: rgba(16, 112, 202, 0.09);
   box-shadow: rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset, rgba(67, 90, 111, 0.06) 0px 1px 1px 0px inset;
 }
-.huv-button--blue {
+.huv-button--blue:not([disabled]) {
   color: #fff;
   background-color: #015ebd;
   box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
@@ -82,16 +84,20 @@ const styles = `
   background-image: -moz-linear-gradient(to top, #0165c7, #0173df);
   background-image: linear-gradient(to bottom, #0788DE, #116AB8);
 }
-.huv-button--blue:hover {
+.huv-button--blue:not([disabled]):hover {
   background-image: -webkit-linear-gradient(to top, #015ebd, #016cd1);
   background-image: -moz-linear-gradient(to top, #015ebd, #016cd1);
   background-image: linear-gradient(to top, #015ebd, #016cd1);
 }
-.huv-button--blue:active {
+.huv-button--blue:not([disabled]):active {
   box-shadow: inset 0 0 0 1px rgba(67,90,111,0.204), inset 0 -1px 1px 0 rgba(67,90,111,0.204);
   background-image: -webkit-linear-gradient(to top, #0055b0, #004ca3);
   background-image: -moz-linear-gradient(to top, #0055b0, #004ca3);
   background-image: linear-gradient(to top, #0055b0, #004ca3);
+}
+.huv-button[disabled] {
+  pointer-events: none;
+  opacity: 0.8;
 }
 .huv-shadow {
   box-shadow: rgba(67, 90, 111, 0.416) 0px 0px 1px, rgba(67, 90, 111, 0.3) 0px 2px 4px -2px;
@@ -327,7 +333,8 @@ export function PollingPlaceFinderStyles() {
       rel="stylesheet"
       href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"
     />,
-    <style key={1} dangerouslySetInnerHTML={css} />
+    <style key={1} dangerouslySetInnerHTML={css} />,
+    <PlanMakerStyles key={2} />
   ]
 }
 
