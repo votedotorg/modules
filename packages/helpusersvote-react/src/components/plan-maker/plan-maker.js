@@ -196,38 +196,10 @@ function getLambdaParams({ type, value, location, directionsHref }) {
     Payload: JSON.stringify({
       method: type,
       value: payloadValue,
-      pollLocation: _.get(location, 'address.locationName'),
+      pollLocationName: _.get(location, 'address.locationName'),
       pollAddress: _.get(location, 'address.text'),
-      body: createMessageBody({ type, location, directionsHref })
+      directions: directionsHref
     })
-  }
-}
-
-/**
- * Create the message body needed for Lambda functions
- *
- * @param {String}
- * @return {String}
- */
-function createMessageBody({ type, location, directionsHref }) {
-  switch (type) {
-    case 'phone':
-      var response = 'Hi, this is Vote.org!\r\n\r\n'
-      response += `Here is your friendly reminder to vote on Election Day (November 6th) at ${
-        location.address.locationName
-      }.\r\n\r\n`
-      response += `Below is the address which provides directions to get there!\r\n\r\n${
-        location.address.text
-      }`
-      return response
-    default:
-      return `Hi, this is Vote.org!<br><br>
-        Here is your friendly reminder to vote on Election Day (November 6th) at ${
-          location.address.locationName
-        }.<br>
-        Below is the address and a link for directions to get there!<br><br>
-        ${location.address.text}<br>
-        <a href='${directionsHref}' target='_blank'>Get Directions</a>`
   }
 }
 
