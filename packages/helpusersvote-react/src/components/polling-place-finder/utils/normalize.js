@@ -372,13 +372,7 @@ export function normalizeLocation(location, options = {}) {
   groupedDates = normalizeDateRange(groupedDates)
 
   // Select dropdown text
-  var selectText = `${address.line1} ${
-    !hoursToday && !hoursParseFail
-      ? '(Closed today)'
-      : isClosed
-        ? '(Closed now)'
-        : ''
-  }`
+  var selectText = address.line1
 
   if (options.dropOff) {
     selectText += ' (Drop-off)'
@@ -392,6 +386,7 @@ export function normalizeLocation(location, options = {}) {
     selectText,
     notes,
     hours,
+    isClosed,
     fallbackHours,
     groupedDates,
     hoursParseFail,
@@ -518,10 +513,24 @@ function parseHours(hours) {
           var [startHours = 0, startMinutes = 0] = (startParts[0] || '')
             .split(':')
             .map(i => parseInt(i))
+
+          var startPostfix = (startParts[1] || '').toUpperCase()
+
+          if (startPostfix === 'PM') {
+            startHours += 12
+          }
+
           var endParts = endTime.split(' ')
           var [endHours = 0, endMinutes = 0] = (endParts[0] || '')
             .split(':')
             .map(i => parseInt(i))
+
+          var endPostfix = (endParts[1] || '').toUpperCase()
+
+          if (endPostfix === 'PM') {
+            endHours += 12
+          }
+
           var isoLocalDate = Day(month + ' ' + date + ', 2018').format()
           var startDate = Day(`${month} ${date}, 2018`)
             .set('h', startHours)

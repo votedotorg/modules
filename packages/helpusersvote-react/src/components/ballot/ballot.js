@@ -126,7 +126,7 @@ export class Ballot extends Component {
     if (!(address && address.line1)) {
       content = (
         <AddressForm
-          title="Preview your ballot"
+          title="What's on your ballot?"
           onSelectAddress={onSelectAddress}
           useAutocomplete={shouldUseAutocomplete}
         />

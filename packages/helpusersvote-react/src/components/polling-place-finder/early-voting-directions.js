@@ -218,7 +218,7 @@ export function EarlyVotingDirections({
                     {!location.hoursParseFail &&
                       !location.groupedDates.length &&
                       location.fallbackHours && (
-                        <div>No upcoming early voting hours</div>
+                        <small>No upcoming early voting hours</small>
                       )}
                     {!location.hoursParseFail &&
                       !location.groupedDates.length &&
