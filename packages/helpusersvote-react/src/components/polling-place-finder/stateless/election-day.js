@@ -1,6 +1,6 @@
 import React from 'react'
 
-const LEARN_MORE_HREF = 'https://www.usvotefoundation.org/vote/eoddomestic.htm'
+const LEARN_MORE_HREF = 'https://www.vote.org/election-protection/'
 
 export function ElectionDayNotice({ isElectionDay }) {
   return isElectionDay ? (

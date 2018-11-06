@@ -2,7 +2,8 @@ import React from 'react'
 import cx from 'classnames'
 import { getState } from '@helpusersvote/logic'
 import { getMoreInfoLink } from '../utils'
-import { captureException } from '@sentry/core'
+
+const leoSiteHref = 'https://www.usvotefoundation.org/vote/eoddomestic.htm'
 
 export function ElectionReferendums({
   info,
@@ -130,6 +131,18 @@ export function ElectionReferendums({
           </div>
         </div>
       ))}
+      <div className="f6 gray mt4">
+        This guide may not be a complete list of referendums on your ballot. For
+        an official list of what will be on your ballot, please{' '}
+        <a
+          className="dib link blue underline-hover pointer"
+          href={leoSiteHref}
+          target="_blank"
+        >
+          contact your local elections office
+        </a>
+        .
+      </div>
     </div>
   )
 }

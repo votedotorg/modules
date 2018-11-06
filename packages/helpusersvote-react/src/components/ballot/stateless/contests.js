@@ -64,6 +64,12 @@ export function Contests({
               </span>
             )}
           </label>
+          {contest.numberVotingFor > 1 && (
+            <span className="db mb2 gray f7">
+              On your ballot, you’ll be able to select up to{' '}
+              {contest.numberVotingFor} candidates to vote for.{' '}
+            </span>
+          )}
           {contest.candidates &&
             contest.candidates.map(candidate => (
               <CandidateDetail

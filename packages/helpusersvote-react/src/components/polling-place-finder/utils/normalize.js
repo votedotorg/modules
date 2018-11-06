@@ -181,7 +181,7 @@ function getUniqueParty(party) {
  */
 
 function normalizeGeneral(contest) {
-  contest.office = normalizeOffice(contest.office)
+  contest.office = normalizeOffice(contest)
 
   // De-duplicate candidates, and group parties into an array.
   if (contest.candidates) {
@@ -242,8 +242,23 @@ function normalizeGeneral(contest) {
  * @return {String}
  */
 
-function normalizeOffice(office) {
+function normalizeOffice(contest) {
+  var office = contest.office
+
   if (!office) return null
+
+  if (contest.district && contest.district.scope && contest.district.id) {
+    var districtPrefix = _.capitalize(contest.district.scope)
+    var districtId = contest.district.id
+
+    if (districtId.indexOf(districtPrefix) >= 0) {
+      districtPrefix = ''
+    }
+
+    office += [', ', districtPrefix, contest.district.id]
+      .filter(Boolean)
+      .join(' ')
+  }
 
   // Make the separator more readable.
   office = office.replace('/', ' & ')
@@ -255,6 +270,19 @@ function normalizeOffice(office) {
   var name = state ? state.name : null
 
   if (name) office = name + office.slice(2)
+
+  try {
+    if (office.numberVotingFor) {
+      office.numberVotingFor = parseInt(office.numberVotingFor || 1, 10)
+    }
+
+    if (office.numberElected) {
+      office.numberElected = parseInt(office.numberElected || 1, 10)
+    }
+  } catch (err) {
+    office.numberElected = 1
+    office.numberVotingFor = 1
+  }
 
   return office
 }
@@ -309,6 +337,10 @@ function normalizeReferendum(contest) {
   if (contest.referendumBallotResponses) {
     if (contest.referendumBallotResponses.filter(r => r === '').length > 0) {
       contest.referendumBallotResponses = ['Yes', 'No']
+    } else {
+      contest.referendumBallotResponses = contest.referendumBallotResponses.map(
+        r => (r ? r.replace('[ ] ', '') : r)
+      )
     }
   }
 

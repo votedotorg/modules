@@ -17,7 +17,23 @@ if (typeof window !== 'undefined') {
 
 export function getMoreInfoLink({ href, term }) {
   const moreInfoHref = href || 'ballotpedia.org'
+
   return `http://www.google.com/search?q=${term}+site%3A${moreInfoHref}&btnI`
+}
+
+export function getMoreCandidateInfoLink({ href, contest, state, candidate }) {
+  let term = candidate.names ? candidate.names[0] : candidate.name
+
+  if (!contest.roles || contest.roles[0] !== 'headOfGovernment') {
+    if (state) {
+      term = `"${term}" ${state}`
+    }
+  }
+
+  return getMoreInfoLink({
+    href,
+    term
+  })
 }
 
 export function getPartyColor(party) {
@@ -51,21 +67,6 @@ export function getPartyColor(party) {
     default:
       return 'unknown'
   }
-}
-
-export function getMoreCandidateInfoLink({ href, contest, state, candidate }) {
-  let term = candidate.names ? candidate.names[0] : candidate.name
-
-  if (!contest.roles || contest.roles[0] !== 'headOfGovernment') {
-    if (state) {
-      term = `"${term}" ${state}`
-    }
-  }
-
-  return getMoreInfoLink({
-    href,
-    term
-  })
 }
 
 /*
