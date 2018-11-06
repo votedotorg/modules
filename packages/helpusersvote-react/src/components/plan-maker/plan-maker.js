@@ -47,9 +47,9 @@ export class PlanMaker extends Component {
     return (
       <div className="outdent plan-maker mb3">
         <div className="heading-container flex justify-between">
-          <h1 className="heading">{step.title}</h1>
+          <h1 className="plan-maker-heading f7">{step.title}</h1>
           {stepIndex < steps.length && (
-            <span className="gray f6" style={{ lineHeight: '23px' }}>
+            <span className="gray f7" style={{ lineHeight: '23px' }}>
               Step {stepIndex + 1} of 2
             </span>
           )}

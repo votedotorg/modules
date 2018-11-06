@@ -264,9 +264,15 @@ const styles = `
   padding: 16px;
   border-bottom: 1px solid rgba(67, 90, 111, 0.145);
 }
+
 .heading {
   margin: 0;
   font-size: 14px;
+  line-height: 24px;
+  color: #000;
+}
+.plan-maker-heading {
+  margin: 0;
   line-height: 24px;
   color: #000;
 }
