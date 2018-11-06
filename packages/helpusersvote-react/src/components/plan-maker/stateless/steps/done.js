@@ -28,10 +28,7 @@ export function Done({ values, location }) {
         Election Day.
         <br />
         <br />
-        Just leave your email or phone number below.
-        <br />
-        <br />
-        You can also sign up for{' '}
+        Just leave your email or phone number below, or you can sign up for{' '}
         <a
           className="link blue underline-hover pointer"
           href="https://www.vote.org/election-reminders/"
@@ -49,6 +46,7 @@ export function Done({ values, location }) {
           listItems={calendarItems}
         />
       </div>
+      <div className="pb4" />
     </div>
   )
 }

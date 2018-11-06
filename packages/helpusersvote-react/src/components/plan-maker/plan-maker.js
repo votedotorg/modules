@@ -62,63 +62,69 @@ export class PlanMaker extends Component {
             onSelect={this.onStepSelect(stepIndex)}
           />
         </div>
-        <div className="footer-container">
-          <div className="directions-label">Want a reminder in your email?</div>
-          {emailSubmitted ? (
-            <div>
-              Awesome! We&rsquo;ll remind you at{' '}
-              <strong>{emailSubmitted}</strong>.
+        <div className="footer-container flex-l">
+          <div className="w-50-l pr2-l">
+            <div className="directions-label">
+              Want a reminder in your email?
             </div>
-          ) : (
-            <form
-              onSubmit={this.onReminderSubmit('email')}
-              className="flex justify-between"
-            >
-              <input
-                required
-                type="email"
-                value={email}
-                placeholder="Email address"
-                onChange={this.onInputChange('email')}
-                className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
-              />
-              <Button
-                disabled={!isEmailValid}
-                classes="ml2"
-                style={{ height: 36 }}
+            {emailSubmitted ? (
+              <div>
+                Awesome! We&rsquo;ll remind you at{' '}
+                <strong>{emailSubmitted}</strong>.
+              </div>
+            ) : (
+              <form
+                onSubmit={this.onReminderSubmit('email')}
+                className="flex justify-between"
               >
-                Remind
-              </Button>
-            </form>
-          )}
-          <div className="directions-label mt3">Or on your phone?</div>
-          {phoneSubmitted ? (
-            <div>
-              Great! You&rsquo;ll get a text at{' '}
-              <strong>{phoneSubmitted}</strong>.
-            </div>
-          ) : (
-            <form
-              onSubmit={this.onReminderSubmit('phone')}
-              className="flex justify-between"
-            >
-              <input
-                required
-                type="tel"
-                value={phone}
-                placeholder="Phone number"
-                onChange={this.onInputChange('phone')}
-                className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
-              />
-              <Button
-                disabled={!isPhoneValid}
-                classes="ml2"
-                style={{ height: 36 }}
+                <input
+                  required
+                  type="email"
+                  value={email}
+                  placeholder="Email address"
+                  onChange={this.onInputChange('email')}
+                  className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
+                />
+                <Button
+                  disabled={!isEmailValid}
+                  classes="ml2"
+                  style={{ height: 36 }}
+                >
+                  Remind
+                </Button>
+              </form>
+            )}
+          </div>
+          <div className="w-50-l pl2-l">
+            <div className="directions-label mt3 mt0-l">Or on your phone?</div>
+            {phoneSubmitted ? (
+              <div>
+                Great! You&rsquo;ll get a text at{' '}
+                <strong>{phoneSubmitted}</strong>.
+              </div>
+            ) : (
+              <form
+                onSubmit={this.onReminderSubmit('phone')}
+                className="flex justify-between"
               >
-                Remind
-              </Button>
-            </form>
-          )}
+                <input
+                  required
+                  type="tel"
+                  value={phone}
+                  placeholder="Phone number"
+                  onChange={this.onInputChange('phone')}
+                  className="mw-100 w-100 f5 input-reset ba b--black-20 pa2 border-box br1"
+                />
+                <Button
+                  disabled={!isPhoneValid}
+                  classes="ml2"
+                  style={{ height: 36 }}
+                >
+                  Remind
+                </Button>
+              </form>
+            )}
+          </div>
         </div>
       </div>
     )
@@ -150,12 +156,14 @@ export class PlanMaker extends Component {
       })
       var lambda = new AWS.Lambda({ region: region, apiVersion: '2015-03-31' })
 
-      lambda.invoke(lambdaParams, function(error, data) {
-        if (error) {
-          console.log(error)
-          reportError(error)
-        } else {
-          console.log(data.Payload)
+      lambda.invoke(lambdaParams, (err, data) => {
+        if (err) {
+          console.log(err)
+          reportError(err)
+        } else if (data.Payload) {
+          if (data.Payload !== 'ok') {
+            reportError(new Error(`vdo.remindLambda: ${data.Payload}`))
+          }
         }
       })
     }

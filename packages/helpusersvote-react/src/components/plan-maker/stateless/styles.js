@@ -22,8 +22,9 @@ const styles = `
   border: 1px solid #579ad9;
   box-shadow: 0 0 0 3px rgba(1,108,209,0.301);
 }
-.footer-container {
+.plan-maker .footer-container {
   padding: 16px;
+  background: #F9F9FB;
   border-top: 1px solid rgba(67, 90, 111, 0.145);
 }
 
