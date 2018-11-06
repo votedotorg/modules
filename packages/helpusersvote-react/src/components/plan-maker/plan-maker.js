@@ -2,7 +2,7 @@ import _ from 'lodash'
 import * as AWS from 'aws-sdk'
 import React, { Component } from 'react'
 import Button from '../polling-place-finder/stateless/button'
-import { reportError } from '../polling-place-finder/utils'
+import { trackEvent, reportError } from '../polling-place-finder/utils'
 
 import Step1 from './stateless/steps/step-1'
 import Step2 from './stateless/steps/step-2'
@@ -62,8 +62,8 @@ export class PlanMaker extends Component {
             onSelect={this.onStepSelect(stepIndex)}
           />
         </div>
-        <div className="footer-container flex-l">
-          <div className="w-50-l pr2-l">
+        <div className="footer-container flex-m">
+          <div className="w-50-m pr2-m">
             <div className="directions-label">
               Want a reminder in your email?
             </div>
@@ -95,8 +95,8 @@ export class PlanMaker extends Component {
               </form>
             )}
           </div>
-          <div className="w-50-l pl2-l">
-            <div className="directions-label mt3 mt0-l">Or on your phone?</div>
+          <div className="w-50-m pl2-m">
+            <div className="directions-label mt3 mt0-m">Or on your phone?</div>
             {phoneSubmitted ? (
               <div>
                 Great! You&rsquo;ll get a text at{' '}
@@ -140,21 +140,31 @@ export class PlanMaker extends Component {
   onInputChange = key => e =>
     this.setState({ [key]: e.target ? e.target.value : e })
 
-  onReminderSubmit = key => e => {
+  onReminderSubmit = type => e => {
     // prevent form submission
     e.preventDefault()
     e.stopPropagation()
 
     const { location, directionsHref } = this.props
 
+    trackEvent({
+      name: 'Reminder Submitted',
+      properties: {
+        type
+      }
+    })
+
     if (location) {
-      var lambdaParams = getLambdaParams({
-        type: key,
-        value: this.state[key],
+      const lambdaParams = getLambdaParams({
+        type,
+        value: this.state[type],
         location,
         directionsHref
       })
-      var lambda = new AWS.Lambda({ region: region, apiVersion: '2015-03-31' })
+      const lambda = new AWS.Lambda({
+        region: region,
+        apiVersion: '2015-03-31'
+      })
 
       lambda.invoke(lambdaParams, (err, data) => {
         if (err) {
@@ -168,10 +178,10 @@ export class PlanMaker extends Component {
       })
     }
 
-    const { [key]: value } = this.state
+    const { [type]: value } = this.state
 
     this.setState({
-      [key + 'Submitted']: value
+      [type + 'Submitted']: value
     })
   }
 
