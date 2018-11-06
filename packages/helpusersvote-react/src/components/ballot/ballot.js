@@ -304,12 +304,24 @@ export class Ballot extends Component {
 
       if (scrollY >= elTop) {
         floatingHeader = true
-        $header.style = `width: ${ballotWidth}px;`
+
+        if (typeof $header.style === 'string') {
+          $header.style = `width: ${ballotWidth}px;`
+        } else {
+          $header.style.width = `${ballotWidth}px`
+        }
+
         $header.classList.add('floating')
         $headerFill.classList.add('visible')
       } else {
         floatingHeader = false
-        $header.style = ''
+
+        if (typeof $header.style === 'string') {
+          $header.style = ''
+        } else {
+          $header.style.width = ''
+        }
+
         $header.classList.remove('floating')
         $headerFill.classList.remove('visible')
       }
