@@ -66,7 +66,7 @@ export function normalizeVoterInfo(info = {}) {
   // If there are contests, split them into general and referendums.
   if (info.contests) {
     data.generals = info.contests
-      .filter(c => c.contest == 'General')
+      .filter(c => c.type == 'General')
       .map(normalizeGeneral)
 
     data.referendums = info.contests
