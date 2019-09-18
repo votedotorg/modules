@@ -38,10 +38,10 @@ function getDefaultInfoApiRequest() {
     .then(d => d.voterInfo)
 }
 
-const electionId = 6000 // 2018 U.S. Midterms
+const electionId = 10 // 2019 U.S. Midterms
 const googleCivicInfoApiHost =
   process.env.CIVIC_INFO_API_HOST ||
-  'https://content.googleapis.com/civicinfo/v2/voterinfo'
+  'http://api.ballotinfo.org/voterinfo'
 
 function getCivicInfoApiRequest({ address }) {
   const addr = toAddr(address)
