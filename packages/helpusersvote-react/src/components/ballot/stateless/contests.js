@@ -148,20 +148,6 @@ function CandidateDetail({
           </span>
           <CandidateParties parties={candidate.parties} />
         </label>
-      </div>
-      <a
-        className="huv-button fw5 fr relative"
-        href={getMoreCandidateInfoLink({
-          href: moreInfoHref,
-          contest,
-          candidate,
-          state
-        })}
-        target="_blank"
-        rel="noopener"
-      >
-        <span className="dn di-ns">More Info</span> &rarr;
-      </a>
     </div>
   )
 }

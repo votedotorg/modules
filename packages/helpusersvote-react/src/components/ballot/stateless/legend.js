@@ -53,11 +53,7 @@ export function Legend({ info, onMoreInfoHrefSelect }) {
       <h3 className="b f4" style={{ borderTop: 'none' }}>
         Legend
       </h3>
-      {content}
-      <div className="directions-label mt2 flex justify-end items-center">
-        <span className="dib mr2">More info will open on</span>
-        <MoreInfoSelect onSelect={onMoreInfoHrefSelect} />
-      </div>
+      {content}   
     </div>
   )
 }
