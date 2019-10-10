@@ -1,7 +1,7 @@
 <script>
   // Staging/demo low-limit key
-  var googleApiKey = 'AIzaSyDkERCF3AeLQRVjvJ1EX6sbbYl_aN-iCq0'
-  var civicApiKey = 'Z2bzojx3x6nVEwip'
+  var googleApiKey = process.env.GMAPS_API_KEY
+  var civicApiKey = process.env.CIVIC_INFO_API_KEY
 
   window.GMAPS_API_KEY = googleApiKey
   window.CIVIC_INFO_API_KEY = civicApiKey
