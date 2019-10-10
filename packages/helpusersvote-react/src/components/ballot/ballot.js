@@ -16,6 +16,7 @@ import {
   reportError,
   trackPageview,
   fetchVoterInfo,
+  listenForEvents,
   normalizeVoterInfo
 } from '../polling-place-finder/utils'
 import {
@@ -23,7 +24,8 @@ import {
   setEncryptedBallot,
   getEncryptedAddress,
   setEncryptedAddress,
-  recoverEncryptedValues
+  recoverEncryptedValues,
+  persistEncryptedValues
 } from './utils'
 
 export function StatelessBallot({
@@ -258,6 +260,7 @@ export class Ballot extends Component {
     }
 
     trackPageview(pageview)
+    listenForEvents()
   }
 
   loadVoterInfo = async address => {
@@ -442,6 +445,7 @@ export class Ballot extends Component {
   }
 
   onOpenModal = async () => {
+    await persistEncryptedValues()
     this.setState({ isModalOpen: true, choiceDelta: {}, newChoiceCount: 0 })
 
     const { address } = this.state

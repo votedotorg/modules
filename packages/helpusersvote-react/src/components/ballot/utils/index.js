@@ -111,6 +111,22 @@ function getEncryptedValuesFromStorage() {
 
 const namespaceId = 'ebd_vdo'
 
+export async function persistEncryptedValues() {
+  try {
+    const configId = generateKeyId()
+    const values = getEncryptedValuesFromStorage()
+
+    return await storeConfig({
+      namespaceId,
+      configId,
+      body: values
+    })
+  } catch (err) {
+    console.error(err)
+    return true
+  }
+}
+
 function confirmBallotRecovery() {
   return window.confirm(
     'You already have a ballot saved. Do you want to override it?'

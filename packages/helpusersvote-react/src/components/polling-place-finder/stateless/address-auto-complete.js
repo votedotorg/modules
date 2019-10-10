@@ -38,7 +38,7 @@ export class AddressAutoComplete extends Component {
       ]
     }
 
-    if (!inputValue || inputValue.length < 5) {
+    if (!inputValue || inputValue.length < 3) {
       this.setState({
         activeIndex: 0,
         places: []

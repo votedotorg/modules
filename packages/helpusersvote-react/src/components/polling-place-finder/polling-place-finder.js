@@ -11,6 +11,7 @@ import {
   trackPageview,
   fetchVoterInfo,
   getQueryAddress,
+  listenForEvents,
   normalizeVoterInfo,
   getEncryptedAddress,
   setEncryptedAddress,
@@ -172,6 +173,7 @@ class PollingPlaceFinder extends Component {
     }
 
     trackPageview(pageview)
+    listenForEvents()
   }
 
   onClickDirections = () => {

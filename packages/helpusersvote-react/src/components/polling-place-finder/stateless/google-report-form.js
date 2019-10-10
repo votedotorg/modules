@@ -1,9 +1,5 @@
 import React from 'react'
-import { 
-  trackEvent,
-  getEncryptedAddress,
-  setEncryptedAddress
-} from '../utils'
+import { trackEvent } from '../utils'
 
 function GoogleReportForm({ address = {} }) {
   return (
