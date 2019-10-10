@@ -1,31 +1,8 @@
 import AEvent from 'analytics-event'
 import { getQueryParam } from './url'
 import { reportError } from './errors'
-import { sendEvents } from './network'
 
 const batch = []
-const EVENT_BATCH_SIZE = 10
-const EVENT_BATCH_INTERVAL = 2000 // 2 seconds
-
-let isListeningForEvents
-
-export function listenForEvents() {
-  if (isListeningForEvents) {
-    return
-  }
-
-  isListeningForEvents = true
-
-  setInterval(async () => {
-    try {
-      const batchToSend = batch.splice(0, EVENT_BATCH_SIZE)
-
-      await sendEvents(batchToSend)
-    } catch (err) {
-      // Silence errors from analytics
-    }
-  }, EVENT_BATCH_INTERVAL)
-}
 
 export function track(input) {
   if (!input.context) {

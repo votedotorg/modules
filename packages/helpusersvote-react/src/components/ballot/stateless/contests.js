@@ -148,6 +148,7 @@ function CandidateDetail({
           </span>
           <CandidateParties parties={candidate.parties} />
         </label>
+      </div>
     </div>
   )
 }
