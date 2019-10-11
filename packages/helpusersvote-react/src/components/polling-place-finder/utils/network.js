@@ -27,7 +27,7 @@ function getDefaultInfoApiRequest() {
 const electionId = 10 // 2019 U.S. Midterms
 const googleCivicInfoApiHost =
   process.env.CIVIC_INFO_API_HOST ||
-  'http://api.ballotinfo.org/voterinfo'
+  'https://api.ballotinfo.org/voterinfo'
 
 function getCivicInfoApiRequest({ address }) {
   const addr = toAddr(address)
