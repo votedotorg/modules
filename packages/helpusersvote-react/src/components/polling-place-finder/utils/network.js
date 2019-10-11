@@ -35,7 +35,16 @@ function getCivicInfoApiRequest({ address }) {
     addr
   )}`
 
-  return fetch(url)
+  return fetch(url, {
+    method: 'GET',
+    mode:'cors',
+    headers: {
+      'Content-Type': 'text/plain',
+      'Sec-Fetch-Mode':'cors',
+      'Accept-Language': 'en-US,en;q=0.9',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+    }
+  })
     .then(r => r.json())
     .catch(reportError)
 }
