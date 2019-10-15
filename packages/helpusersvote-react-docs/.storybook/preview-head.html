@@ -1,9 +1,10 @@
 <script>
   // Staging/demo low-limit key
-  var googleApiKey = 'AIzaSyA3NMfx_OdUOzvC4eeSsO6d95_m6rEe5xA'
+  var googleApiKey = process.env.GMAPS_API_KEY
+  var civicApiKey = process.env.CIVIC_INFO_API_KEY
 
   window.GMAPS_API_KEY = googleApiKey
-  window.CIVIC_INFO_API_KEY = googleApiKey
+  window.CIVIC_INFO_API_KEY = civicApiKey
 </script>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
