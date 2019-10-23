@@ -120,10 +120,7 @@ function CandidateDetail({
       >
         <span className="dn di-ns">Visit candidate's site</span> &rarr;
       </a>;
-    } else {
-      moreInfo = '';
     }
-
   return (
     <div
       className={cx(
