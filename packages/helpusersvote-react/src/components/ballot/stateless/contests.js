@@ -118,7 +118,7 @@ function CandidateDetail({
         target="_blank"
         rel="noopener"
       >
-        <span className="dn di-ns">Visit candidate's site</span> &rarr;
+        <span className="dn di-ns">Visit candidate's website</span> &rarr;
       </a>;
     }
   return (
