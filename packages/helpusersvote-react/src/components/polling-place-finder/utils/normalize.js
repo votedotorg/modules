@@ -192,8 +192,9 @@ function normalizeGeneral(contest) {
       var party = getUniqueParty(c.party)
       var parties = c.parties ? c.parties.map(getUniqueParty) : []
       var name = c.name.replace('/', ' & ')
+      var url = c.candidateUrl
       var cached = cache[name]
-      var candidate = cached ? cached : { name, parties }
+      var candidate = cached ? cached : { name, parties, url }
 
       // Add a unique key.
       candidate.key = encodeURIComponent(name)

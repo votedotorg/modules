@@ -110,7 +110,17 @@ function CandidateDetail({
 }) {
   const isChecked = ballot[contest.office] === candidate.key
   const isOtherChecked = ballot[contest.office] && !isChecked
-
+  let moreInfo
+  if (candidate.url != null) {
+      moreInfo = <a
+        className="huv-button fw5 fr relative"
+        href={candidate.url} 
+        target="_blank"
+        rel="noopener"
+      >
+        <span className="dn di-ns">Visit candidate's website</span> &rarr;
+      </a>;
+    }
   return (
     <div
       className={cx(
@@ -149,6 +159,7 @@ function CandidateDetail({
           <CandidateParties parties={candidate.parties} />
         </label>
       </div>
+      {moreInfo}
     </div>
   )
 }

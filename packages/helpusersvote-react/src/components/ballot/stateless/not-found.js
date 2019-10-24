@@ -35,16 +35,15 @@ export function BallotNotFound({
               <p className="lh-copy">
                 {description || (
                   <React.Fragment>
-                    Not all ballot information is available online, please check
-                    with your{' '}
+                    We’re unable to find your ballot info. Please make sure you're entering your full address where you are registered to vote. If you're still not seeing anything, check with your{' '} 
                     <a
                       className="dib link blue underline-hover pointer"
                       href="https://www.usvotefoundation.org/vote/eoddomestic.htm"
                       target="_blank"
                     >
-                      local election office
-                    </a>
-                    .
+                      local election office 
+                    </a> 
+                     {' '}for full information about elections that might be occurring in your area.
                   </React.Fragment>
                 )}
               </p>
