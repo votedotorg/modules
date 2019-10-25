@@ -59,27 +59,7 @@ export function BallotHeader({
           </div>
         </div>
         <div className="mt3 mt0-ns pl3-ns dn dn-m db-ns">
-          <div className="directions-label flex justify-between">
-            <div>On the go?</div>
-            {newChoiceCount > 0 && (
-              <small className="db red ttu">
-                {newChoiceCount} edit
-                {newChoiceCount > 1 ? 's' : ''}
-              </small>
-            )}
-          </div>
-          <div>
-            <button
-              className={cx(
-                'huv-button',
-                newChoiceCount > 0 && 'huv-button--blue'
-              )}
-              onClick={onOpenModal}
-              style={{ height: 36 }}
-            >
-              Open on your phone
-            </button>
-          </div>
+          
         </div>
       </div>
       <div className="ballot-header-fill" />
