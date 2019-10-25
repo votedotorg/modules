@@ -111,6 +111,22 @@ function getEncryptedValuesFromStorage() {
 
 const namespaceId = 'ebd_vdo'
 
+export async function persistEncryptedValues() {
+  try {
+    const configId = generateKeyId()
+    const values = getEncryptedValuesFromStorage()
+
+    return await storeConfig({
+      namespaceId,
+      configId,
+      body: values
+    })
+  } catch (err) {
+    console.error(err)
+    return true
+  }
+}
+
 function confirmBallotRecovery() {
   return window.confirm(
     'You already have a ballot saved. Do you want to override it?'
@@ -127,10 +143,7 @@ export async function recoverEncryptedValues(opts = {}) {
   const { hash = '' } = opts
   const payload = parseKeyFragment(hash)
   const configId = generateKeyId(payload)
-  const encryptedValues = await getConfig({
-    namespaceId,
-    configId
-  })
+  const encryptedValues = ""
 
   const delta = {
     ...encryptedValues,
@@ -167,7 +180,7 @@ export function generateKeyId(opts = {}) {
   } = opts
 
   return (
-    'ekv_' + HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString(Base58)
+    'ekv_' + HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString()
   )
 }
 
@@ -175,7 +188,6 @@ window.generateKeyId = generateKeyId
 
 export async function getKeyFragment() {
   const payload = {}
-
   payload.ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
   payload.ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
   payload.bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
@@ -281,7 +293,7 @@ async function setEncryptedJSON({ cryptoKeyName, key, value: inputValue }) {
 
 async function setEncryptedData({ cryptoKeyName, key, value }) {
   try {
-    const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
+    /*const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
 
     const { counter, encryptedArrayBuffer } = await encryptData({
       cryptoKey,
@@ -289,7 +301,7 @@ async function setEncryptedData({ cryptoKeyName, key, value }) {
     })
 
     await storage.setItem(key + '_ctr', counter)
-    await storage.setItem(key, encryptedArrayBuffer)
+    await storage.setItem(key, encryptedArrayBuffer)*/
 
     return true
   } catch (err) {
