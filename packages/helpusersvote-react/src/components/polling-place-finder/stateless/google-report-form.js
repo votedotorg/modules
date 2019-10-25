@@ -18,7 +18,7 @@ function GoogleReportForm({ address = {} }) {
         })
       }
       id="feedback-submit"
-      action="https://voter-info-tool.appspot.com/feedback"
+      action="https://ballotinfo.org/bip/report_issue.html"
       target="_blank"
       method="post"
     >
