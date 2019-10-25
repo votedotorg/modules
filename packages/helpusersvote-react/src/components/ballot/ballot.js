@@ -23,7 +23,6 @@ import {
   setEncryptedBallot,
   getEncryptedAddress,
   setEncryptedAddress,
-  persistEncryptedValues,
   recoverEncryptedValues
 } from './utils'
 

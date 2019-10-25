@@ -111,22 +111,6 @@ function getEncryptedValuesFromStorage() {
 
 const namespaceId = 'ebd_vdo'
 
-export async function persistEncryptedValues() {
-  try {
-    const configId = generateKeyId()
-    const values = getEncryptedValuesFromStorage()
-
-    return await storeConfig({
-      namespaceId,
-      configId,
-      body: values
-    })
-  } catch (err) {
-    console.error(err)
-    return true
-  }
-}
-
 function confirmBallotRecovery() {
   return window.confirm(
     'You already have a ballot saved. Do you want to override it?'
@@ -180,7 +164,7 @@ export function generateKeyId(opts = {}) {
   } = opts
 
   return (
-    'ekv_' + HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString()
+    'ekv_' + HmacSHA1([ak, ac].join('-'), [bk, bc].join('-')).toString(Base58)
   )
 }
 
@@ -188,6 +172,7 @@ window.generateKeyId = generateKeyId
 
 export async function getKeyFragment() {
   const payload = {}
+
   payload.ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
   payload.ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
   payload.bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
