@@ -23,13 +23,6 @@ function GoogleReportForm({ address = {} }) {
       method="post"
     >
       <input type="hidden" name="electionId" value="0" />
-      <input
-        type="hidden"
-        name="address"
-        value={`${address.line1}, ${address.city}, ${address.state} ${
-          address.zip
-        }`}
-      />
       <input type="submit" value="Report an error" className="report-error" />
     </form>
   )
