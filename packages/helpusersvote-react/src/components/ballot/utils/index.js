@@ -127,10 +127,7 @@ export async function recoverEncryptedValues(opts = {}) {
   const { hash = '' } = opts
   const payload = parseKeyFragment(hash)
   const configId = generateKeyId(payload)
-  const encryptedValues = await getConfig({
-    namespaceId,
-    configId
-  })
+  const encryptedValues = ""
 
   const delta = {
     ...encryptedValues,
@@ -281,7 +278,7 @@ async function setEncryptedJSON({ cryptoKeyName, key, value: inputValue }) {
 
 async function setEncryptedData({ cryptoKeyName, key, value }) {
   try {
-    const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
+    /*const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
 
     const { counter, encryptedArrayBuffer } = await encryptData({
       cryptoKey,
@@ -289,7 +286,7 @@ async function setEncryptedData({ cryptoKeyName, key, value }) {
     })
 
     await storage.setItem(key + '_ctr', counter)
-    await storage.setItem(key, encryptedArrayBuffer)
+    await storage.setItem(key, encryptedArrayBuffer)*/
 
     return true
   } catch (err) {
