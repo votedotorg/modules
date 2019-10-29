@@ -70,21 +70,8 @@ export function BallotNotFound({
                 We’re unable to find your ballot info.
                 <br />
                 <div className="mt2 f5-ns f6 center tc gray">
-                  {stateSite ? (
-                    <span>
-                      You can try looking up your polling place on the{' '}
-                      <a
-                        className="link blue underline-hover pointer"
-                        href={stateSite}
-                        target="_blank"
-                      >
-                        {state.name} website
-                      </a>
-                      , or contact
-                    </span>
-                  ) : (
-                    <span>Contact</span>
-                  )}{' '}
+                  <span>Contact</span>
+                  {' '}
                   your{' '}
                   <a
                     className="dib link blue underline-hover pointer"
