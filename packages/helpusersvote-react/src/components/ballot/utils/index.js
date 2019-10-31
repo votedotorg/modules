@@ -1,5 +1,6 @@
 import storage from 'localforage'
 import HmacSHA1 from 'crypto-js/hmac-sha1'
+import CryptoJS from 'crypto-js'
 import Base58 from './base-58'
 import { getConfig, storeConfig } from './network'
 
@@ -74,6 +75,7 @@ export function getPartyColor(party) {
  */
 
 const CRYPTO_ALGO = 'AES-CTR'
+const CRYPTO_SALT = '9999'
 const BALLOT_STORAGE_KEY = 'enc_ballot'
 const BALLOT_CRYPTO_KEY_NAME = 'ballot'
 const ADDRESS_STORAGE_KEY = 'enc_address'
@@ -126,8 +128,10 @@ export async function recoverEncryptedValues(opts = {}) {
 
   const { hash = '' } = opts
   const payload = parseKeyFragment(hash)
-  const configId = generateKeyId(payload)
   const encryptedValues = ""
+  var decryptedAddress = decrypt(decodeURIComponent(payload.ak), CRYPTO_SALT)
+  decryptedAddress = decryptedAddress.toString(CryptoJS.enc.Utf8)
+  setEncryptedAddress(JSON.parse(decryptedAddress))
 
   const delta = {
     ...encryptedValues,
@@ -173,7 +177,7 @@ window.generateKeyId = generateKeyId
 export async function getKeyFragment() {
   const payload = {}
 
-  payload.ak = getLocalItem('key_' + ADDRESS_CRYPTO_KEY_NAME)
+  payload.ak = getLocalItem(ADDRESS_STORAGE_KEY)
   payload.ac = getLocalItem(ADDRESS_STORAGE_KEY + '_ctr')
   payload.bk = getLocalItem('key_' + BALLOT_CRYPTO_KEY_NAME)
   payload.bc = getLocalItem(BALLOT_STORAGE_KEY + '_ctr')
@@ -231,23 +235,20 @@ export async function setEncryptedVoterInfo(info) {
 // High-level JSON APIs
 
 async function getEncryptedJSON({ cryptoKeyName, key }) {
-  const decryptedArrayBuffer = await getEncryptedData({
-    cryptoKeyName,
-    key
-  })
-
-  if (decryptedArrayBuffer.length === 0) {
+  var decryptedJSON = getLocalItem(key)
+  if (decryptedJSON.length === 0) {
     return null
   }
 
   try {
-    const serializedValue = fromArrayBuffer(decryptedArrayBuffer)
+    var serializedValue = decrypt(decodeURIComponent(decryptedJSON), CRYPTO_SALT)
+    serializedValue = serializedValue.toString(CryptoJS.enc.Utf8)
 
     if (!serializedValue || serializedValue.length === 0) {
       return null
     }
 
-    const value = JSON.parse(decodeURIComponent(window.atob(serializedValue)))
+    const value = JSON.parse(serializedValue)
 
     return value
   } catch (err) {
@@ -262,95 +263,56 @@ async function getEncryptedJSON({ cryptoKeyName, key }) {
 }
 
 async function setEncryptedJSON({ cryptoKeyName, key, value: inputValue }) {
-  const serializedValue = window.btoa(
-    encodeURIComponent(JSON.stringify(inputValue))
-  )
-  const value = toArrayBuffer(serializedValue)
+  const encryptedJSON = encodeURIComponent(
+    encrypt(JSON.stringify(inputValue), CRYPTO_SALT))
 
-  return await setEncryptedData({
-    cryptoKeyName,
-    key,
-    value
-  })
+  setLocalItem(key, encryptedJSON)
+  return true
 }
 
 // High-level get/set APIs
 
-async function setEncryptedData({ cryptoKeyName, key, value }) {
-  try {
-    /*const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
+var keySize = 256;
+var iterations = 100;
 
-    const { counter, encryptedArrayBuffer } = await encryptData({
-      cryptoKey,
-      value
-    })
+function encrypt (msg, pass) {
+  var salt = CryptoJS.lib.WordArray.random(128/8);
+  
+  var key = CryptoJS.PBKDF2(pass, salt, {
+      keySize: keySize/32,
+      iterations: iterations
+    });
 
-    await storage.setItem(key + '_ctr', counter)
-    await storage.setItem(key, encryptedArrayBuffer)*/
-
-    return true
-  } catch (err) {
-    console.error('huv.ballot: save failed')
-    console.error(err)
-  }
+  var iv = CryptoJS.lib.WordArray.random(128/8);
+  
+  var encrypted = CryptoJS.AES.encrypt(msg, key, { 
+    iv: iv, 
+    padding: CryptoJS.pad.Pkcs7,
+    mode: CryptoJS.mode.CBC
+    
+  });
+  
+  var encryptedMessage = salt.toString()+ iv.toString() + encrypted.toString();
+  return encryptedMessage;
 }
 
-async function getEncryptedData({ cryptoKeyName, key }) {
-  const encryptedArrayBuffer = await storage.getItem(key)
+function decrypt (encryptedMessage, pass) {
+  var salt = CryptoJS.enc.Hex.parse(encryptedMessage.substr(0, 32));
+  var iv = CryptoJS.enc.Hex.parse(encryptedMessage.substr(32, 32))
+  var encrypted = encryptedMessage.substring(64);
+  
+  var key = CryptoJS.PBKDF2(pass, salt, {
+      keySize: keySize/32,
+      iterations: iterations
+    });
 
-  if (!encryptedArrayBuffer) {
-    return new ArrayBuffer()
-  }
-
-  const counter = await storage.getItem(key + '_ctr')
-  const cryptoKey = await getCryptoKey({ name: cryptoKeyName })
-
-  return await decryptData({ cryptoKey, counter, encryptedArrayBuffer })
-}
-
-// AES-CTR encrypt/decryptData
-
-function generateCtrIV(length = 16) {
-  const ctr = new Uint8Array(length)
-
-  if (window.crypto && window.crypto.getRandomValues) {
-    window.crypto.getRandomValues(ctr)
-  } else {
-    for (let i = 0; i < length; i++) {
-      ctr[i] = Math.floor(Math.random() * 255)
-    }
-  }
-
-  return ctr
-}
-
-async function encryptData({ cryptoKey, value }) {
-  const counter = generateCtrIV(16)
-  const encryptedArrayBuffer = await window.crypto.subtle.encrypt(
-    {
-      name: CRYPTO_ALGO,
-      counter,
-      length: 128
-    },
-    cryptoKey,
-    value
-  )
-
-  return { counter, encryptedArrayBuffer }
-}
-
-async function decryptData({ cryptoKey, counter, encryptedArrayBuffer }) {
-  const decryptedArrayBuffer = await window.crypto.subtle.decrypt(
-    {
-      name: CRYPTO_ALGO,
-      counter,
-      length: 128
-    },
-    cryptoKey,
-    encryptedArrayBuffer
-  )
-
-  return decryptedArrayBuffer
+  var decrypted = CryptoJS.AES.decrypt(encrypted, key, { 
+    iv: iv, 
+    padding: CryptoJS.pad.Pkcs7,
+    mode: CryptoJS.mode.CBC
+    
+  })
+  return decrypted;
 }
 
 // Low-level crypto key utilities
