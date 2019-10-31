@@ -397,6 +397,7 @@ export class Ballot extends Component {
   }
 
   onSelectAddress = async address => {
+    await setEncryptedAddress(address)
     const voterInfo = await this.loadVoterInfo(address)
     const previouslyInvalid = !this.state.address || !this.state.address.line1
 
