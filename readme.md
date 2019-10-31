@@ -15,6 +15,16 @@ This is our monorepo of [npm](https://npmjs.com) modules to use in your applicat
 - [@helpusersvote/logic](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-logic)
 - [@helpusersvote/copy](https://github.com/helpusersvote/modules/tree/master/packages/helpusersvote-copy)
 
+## Running Storybrook (and the full set of apps) locally
+
+1. Run `npm install` in modules repo root
+2. Make sure #1 executes the `npm run bootstrap` command successfully or just run `npm run bootstrap`
+3. New tab, run `cd packages/helpusersvote-react`
+4. In packages/helpusersvote-react, run `npm start`
+5. New tab, run `cd packages/helpusersvote-react-docts`
+6. In packages/helpusersvote-react-docs, run `npm start`
+7. Open `http:localhost:9001` if it didn't open automatically
+
 ## Usage
 
 If you want to add a banner to your React app, install the library:
