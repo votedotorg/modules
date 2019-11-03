@@ -345,6 +345,10 @@ function normalizeReferendum(contest) {
     }
   }
 
+   if (contest.referendumUrl) {
+    contest.url = contest.referendumUrl
+  }
+
   return contest
 }
 
