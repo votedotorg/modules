@@ -251,7 +251,6 @@ function normalizeOffice(contest) {
   // Make the separator more readable.
   office = office.replace('/', ' & ')
 
-  }
 
   try {
     if (office.numberVotingFor) {
