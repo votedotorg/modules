@@ -248,29 +248,10 @@ function normalizeOffice(contest) {
 
   if (!office) return null
 
-  if (contest.district && contest.district.scope && contest.district.id) {
-    var districtPrefix = _.capitalize(contest.district.scope)
-    var districtId = contest.district.id
-
-    if (districtId.indexOf(districtPrefix) >= 0) {
-      districtPrefix = ''
-    }
-
-    office += [', ', districtPrefix, contest.district.id]
-      .filter(Boolean)
-      .join(' ')
-  }
-
   // Make the separator more readable.
   office = office.replace('/', ' & ')
 
-  // Try to match a state abbreviation at the start of the string.
-  var match = office.match(STATE_PREFIX_MATCHER)
-  var abbr = match ? match[1] : null
-  var state = abbr ? getState(abbr) : null
-  var name = state ? state.name : null
-
-  if (name) office = name + office.slice(2)
+  }
 
   try {
     if (office.numberVotingFor) {
