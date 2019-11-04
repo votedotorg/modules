@@ -23,6 +23,55 @@ export class BallotHandoff extends Component {
 
     return (
       <Fragment>
+        <div className="ballot-handoff-callout pointer" onClick={onOpenModal}>
+          <div className="pr2" style={{ flex: 1 }}>
+            <h4 className="ma0 f6 f5-ns lh-copy">
+              Want to take this with you to the polls?
+            </h4>
+            <div className="lh-copy f6 f5-ns">
+              In most states you can bring your phone with you into the polling
+              booth to help you make your choices.{' '}
+              <span className="blue">
+                Click here for instructions on continuing your ballot on your
+                phone.
+              </span>
+            </div>
+          </div>
+        </div>
+        {isModalOpen && (
+          <HandoffModal onCloseModal={onCloseModal}>
+            <div className="flex flex-wrap">
+              <div className="w-75 w-50-ns pr4-ns">
+                <h2 className="f4 mt0">Opening on your phone...</h2>
+                <p className="lh-title">
+                  On the right is an image that you can scan on your phone to
+                  open your ballot. To do this:
+                </p>
+                <ol className="pl3">
+                  <li>Open your phone camera</li>
+                  <li className="mt2">Point at this screen</li>
+                  <li className="mt2">Click link at the top</li>
+                </ol>
+                <p className="lh-title">
+                  Or, send this link to yourself over email or text:
+                  {copied && (
+                    <small className="blue">&nbsp;(copied to clipboard!)</small>
+                  )}
+                </p>
+                <input
+                  readOnly
+                  type="text"
+                  value={ballotHref}
+                  onClick={this.onInputClick}
+                  className="mw-100 w-100 f6-ns f7 input-reset ba b--black-20 pa2 border-box br1"
+                />
+              </div>
+              <div className="w-25 w-50-ns justify-center flex flex-column">
+                <QR width="100%" height="100%" href={ballotHref} src={imgSrc} />
+              </div>
+            </div>
+          </HandoffModal>
+        )}
       </Fragment>
     )
   }
