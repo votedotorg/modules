@@ -108,8 +108,13 @@ function CandidateDetail({
   moreInfoHref,
   onSelectChoice
 }) {
-  const isChecked = ballot[contest.office] === candidate.key
-  const isOtherChecked = ballot[contest.office] && !isChecked
+  const isChecked = ballot[contest.office] === candidate.key || (ballot[contest.office] && ballot[contest.office].includes(candidate.key))
+  let isOtherChecked = ballot[contest.office] && !isChecked
+
+  if (ballot[contest.office] && Array.isArray(ballot[contest.office])){
+    isOtherChecked = isOtherChecked && ballot[contest.office].length >= contest.numberVotingFor
+  }
+  
   let moreInfo
   if (candidate.url != null) {
       moreInfo = <a
@@ -137,7 +142,7 @@ function CandidateDetail({
             checked={isChecked}
             style={{ width: 28, height: 28 }}
             onChange={() =>
-              onSelectChoice(contest.office, isChecked ? null : candidate.key)
+              onSelectChoice(contest.office, isChecked ? 'null_' + candidate.key : candidate.key)
             }
           />
         </div>

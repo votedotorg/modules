@@ -347,16 +347,39 @@ export class Ballot extends Component {
       ballot: previousBallot
     } = this.state
     let ballot = { ...previousBallot }
+    let choice = this.state.voterInfo.generals.find(obj => obj.office == key)
+    let choiceCount = typeof choice != 'undefined' ? choice.numberVotingFor : 1
 
     if (key === '*' && !value) {
       Object.keys(ballot).forEach(k => {
         delete ballot[k]
       })
       choiceDelta = {}
-    } else if (value === null) {
+    } 
+    else if (value === null || (value.startsWith('null_') && choiceCount <= 1)) {
       delete ballot[key]
       choiceDelta[key] = true
-    } else {
+    } 
+    else if (choiceCount > 1) {
+      if(value.startsWith('null_')){
+        ballot[key] = ballot[key].filter(function(choiceValue){
+          return choiceValue != value.replace('null_', '');    
+        });
+
+        if(ballot[key].length < 1){
+          delete ballot[key]
+          choiceDelta[key] = true
+        }
+      }
+      else{
+        if(typeof ballot[key] == 'undefined'){
+          ballot[key] = []
+          choiceDelta[key] = true
+        }
+        ballot[key].push(value)
+      }
+    } 
+    else {
       ballot[key] = value
       choiceDelta[key] = true
     }
