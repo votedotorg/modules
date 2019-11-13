@@ -24,7 +24,7 @@ function getDefaultInfoApiRequest() {
     .then(d => d.voterInfo)
 }
 
-const electionId = 10 // 2019 U.S. Midterms
+const electionId = 12 // 2019 LA election
 const googleCivicInfoApiHost =
   process.env.CIVIC_INFO_API_HOST ||
   'https://api.ballotinfo.org/voterinfo'
