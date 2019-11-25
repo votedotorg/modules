@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,400,700');
+
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.wrapper {
+  position: absolute;
+  background-image: url(./vote.jpg);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-color: #444;
+  background-blend-mode: overlay;
+}
+
+.coming-soon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.coming-soon h1 {
+  display: inline-block;
+  font-size: 24px;
+  padding: 8px 40px;
+  color: #ffd905;
+  animation: text-animation 3s ease-in-out forwards;
+}
+
+.coming-soon .ctdown {
+  font-weight: 700;
+  font-size: 42px;
+  display: flex;
+  justify-content: center;
+  min-height: 160px;
+  opacity: 0;
+  transition: opacity 3s ease-in-out;
+}
+
+.time-box {
+  display: flex;
+  flex-direction: column;
+  color: #ffd905;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0, 0.7);
+  width: 160px;
+  height: 160px;
+}
+
+.time-box:not(:last-child) {
+  margin-right: 20px;
+}
+
+.time-box span {
+  font-size: 18px;
+  font-weight: 200;
+}
+
+@keyframes text-animation {
+  from {
+    transform: scale(0) rotateY(0deg);
+  }
+  to {
+    transform: scale(1) ;
+  }
+}
