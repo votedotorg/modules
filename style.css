@@ -14,7 +14,7 @@ body {
   background-size: cover;
   background-position: 50% 50%;
   background-repeat: no-repeat;
-  background-color: #444;
+  background-color: #205493;
   background-blend-mode: overlay;
 }
 
@@ -31,8 +31,14 @@ body {
   display: inline-block;
   font-size: 24px;
   padding: 8px 40px;
-  color: #ffd905;
-  animation: text-animation 3s ease-in-out forwards;
+  color: #fff;
+  animation: text-animation 2s ease-in-out forwards;
+}
+
+.coming-soon h3 {
+  font-size: 18px;
+  color: #fff;
+  animation: text-animation 2s ease-in-out forwards;
 }
 
 .coming-soon .ctdown {
@@ -48,7 +54,7 @@ body {
 .time-box {
   display: flex;
   flex-direction: column;
-  color: #ffd905;
+  color: #fff;
   align-items: center;
   justify-content: center;
   background: rgba(0,0,0, 0.7);

@@ -6,7 +6,7 @@
   <title>Ballot · Vote.org</title>
   <link rel="stylesheet" media="screen" href="./style.css" />
   <script>
-   const timeToBeReach = new Date("Nov 6, 2020 00:00:00").getTime();
+   const timeToBeReach = new Date("Nov 3, 2020 00:00:00").getTime();
 
 const updateCountDown = setInterval(() => {
 
@@ -33,7 +33,7 @@ const updateCountDown = setInterval(() => {
   //if time is up
   if (timeDistance < 0) {
     clearInterval(updateCountDown);
-    countDown.innerHTML = "It's time !";
+    countDown.innerHTML = "It's time!";
   }
 
 }, 1000);
@@ -44,7 +44,8 @@ const updateCountDown = setInterval(() => {
 <body>
   <section class="wrapper">
     <div class="coming-soon">
-      <h1>Come back near Election Day! (Nov 6th, 2020)</h1>
+      <h1>For more information, check back closer to the next election.</h1>
+	  <h3>Countdown to the Presidential Election on November 3, 2020</h3>
       <div id="countdown" class="ctdown"></div>
     </div>
   </section>
